@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.ninggc.util</groupId>
-    <artifactId>ninggc-util</artifactId>
+    <artifactId>util</artifactId>
     <version>1.0.0</version>
 
     <properties>
