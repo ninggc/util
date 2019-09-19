@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
  */
 @Component
 @Aspect
-public class DaoAopConfigurationImpl implements AopConfiguration {
+public class DaoAopConfigurationImpl extends AopConfiguration {
 
     @Pointcut("execution(* com.ninggc.template.springbootfastdemo.dao.DaoFactory.*..*(..))")
     private void pointCutMethod() {
@@ -25,9 +25,9 @@ public class DaoAopConfigurationImpl implements AopConfiguration {
         Object[] args = joinPoint.getArgs();
         String classAndMethodName = joinPoint.getSignature().toShortString();
 
-        String logContent = "before controller execute: " + classAndMethodName + "\t" +
+        String logContent = "before dao execute: " + classAndMethodName + "\t" +
                 gson.toJson(parameterNames) + " --> " + gson.toJson(args);
-        logger.info(logContent);
+        log(logContent);
     }
 
     @AfterReturning(value = "pointCutMethod()", returning = "returnValue")
@@ -35,9 +35,9 @@ public class DaoAopConfigurationImpl implements AopConfiguration {
     public Object afterReturn(JoinPoint joinPoint, Object returnValue) {
         String classAndMethodName = joinPoint.getSignature().toShortString();
 
-        String logContent = "after controller execute: " + classAndMethodName + "\t"
+        String logContent = "after dao execute: " + classAndMethodName + "\t"
                 + "result --> " + gson.toJson(getResultToAopResult(returnValue));
-        logger.info(logContent);
+        log(logContent);
         return returnValue;
     }
 
@@ -45,9 +45,9 @@ public class DaoAopConfigurationImpl implements AopConfiguration {
     @Override
     public void afterThrow(JoinPoint joinPoint, Exception exception) throws Exception {
         String classAndMethodName = joinPoint.getSignature().toShortString();
-        String logContent = "after controller execute: " + classAndMethodName + "\t"
+        String logContent = "after dao execute: " + classAndMethodName + "\t"
                 + "throw --> " + gson.toJson(exception.getMessage());
-        logger.info(logContent);
+        log(logContent);
         throw exception;
     }
 

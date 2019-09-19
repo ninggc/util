@@ -18,8 +18,11 @@ import org.springframework.core.env.ConfigurableEnvironment;
 @EnableConfigurationProperties({NinggcMorphiaProperties.class})
 @PropertySource("classpath:morphia.properties")
 public class NinggcMorphiaConfiguration {
-    @Autowired
-    NinggcMorphiaProperties properties;
+    private final NinggcMorphiaProperties properties;
+
+    public NinggcMorphiaConfiguration(NinggcMorphiaProperties properties) {
+        this.properties = properties;
+    }
 
     @Bean
     public Morphia morphia() {

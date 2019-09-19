@@ -6,6 +6,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -14,12 +15,13 @@ import java.util.List;
 /**
  * 控制切面的自定义操作
  */
-public interface AopConfiguration {
-    Logger logger = LogManager.getLogger(LogManager.ROOT_LOGGER_NAME);
-    Gson gson = new Gson();
+public abstract class AopConfiguration {
+    private Logger logger = LogManager.getLogger(LogManager.ROOT_LOGGER_NAME);
+    @Autowired
+    protected Gson gson;
 
     @Data
-    class AopResult {
+    private static class AopResult {
         private String explain;
         private String type;
         private Integer totalSize;
@@ -27,21 +29,21 @@ public interface AopConfiguration {
         private List<Object> subList;
     }
 
-    void before(JoinPoint joinPoint);
+    public abstract void before(JoinPoint joinPoint);
 
     /**
      * @param joinPoint
      * @param returnValue 返回值
      * @return
      */
-    Object afterReturn(JoinPoint joinPoint, Object returnValue);
+    public abstract Object afterReturn(JoinPoint joinPoint, Object returnValue);
 
     /**
      * @param joinPoint
      * @param exception 抛出的异常
      * @throws Exception 处理之后要再次抛出
      */
-    void afterThrow(JoinPoint joinPoint, Exception exception) throws Exception;
+    public abstract void afterThrow(JoinPoint joinPoint, Exception exception) throws Exception;
 
     /**
      * 暂时不用
@@ -49,16 +51,15 @@ public interface AopConfiguration {
      * @param joinPoint
      * @throws Throwable
      */
-    void around(ProceedingJoinPoint joinPoint) throws Throwable;
+    public abstract void around(ProceedingJoinPoint joinPoint) throws Throwable;
 
     /**
      * 如果结果是非常长的list，就要截取一部分打印到日志
-     *
      * @param resultValue
      * @return
      */
     @SuppressWarnings("unchecked")
-    default Object getResultToAopResult(final Object resultValue) {
+    protected Object getResultToAopResult(final Object resultValue) {
 //        如果结果太长默认只取三条
         final int maxSize = 3;
         final int maxLength = 300;
@@ -77,6 +78,10 @@ public interface AopConfiguration {
                 return aopResult;
             }
         }
-        return (Object) resultValue;
+        return resultValue;
+    }
+
+    protected void log(String content) {
+        logger.info(content);
     }
 }
