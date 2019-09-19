@@ -1,6 +1,6 @@
 package com.ninggc.util.morphia.dao.base;
 
-import com.ninggc.util.morphia.util.MorphiaMatchMode;
+import com.ninggc.util.morphia.util.MatchMode;
 //import com.wondersgroup.bigdata.project.query.QueryOrderOptions;
 import dev.morphia.query.CriteriaContainer;
 import dev.morphia.query.Query;
@@ -194,7 +194,7 @@ public abstract class AbstractQueryCondition {
      * @param param      查询的参数
      * @param matchMode  匹配模式 现在只支持anywhere、start、end三种
      */
-    public void addLike(String columnName, String param, MorphiaMatchMode matchMode) {
+    public void addLike(String columnName, String param, MatchMode matchMode) {
         Object[] likeParam = new Object[]{param, matchMode};
         if (like == null) {
             Map<String, Object[]> likeCondition = new HashMap<String, Object[]>();
@@ -213,7 +213,7 @@ public abstract class AbstractQueryCondition {
      * @param param      查询的参数
      * @param matchMode  匹配模式 现在只支持anywhere、start、end三种
      */
-    public void addILike(String columnName, String param, MorphiaMatchMode matchMode) {
+    public void addILike(String columnName, String param, MatchMode matchMode) {
         Object[] iLikeParam = new Object[]{param, matchMode};
         if (iLike == null) {
             Map<String, Object[]> iLikeCondition = new HashMap<String, Object[]>();

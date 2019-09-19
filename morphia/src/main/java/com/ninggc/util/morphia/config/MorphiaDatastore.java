@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
  * 比较简陋，现在使用基于spring的配置，请查看config下的Bean
  */
 //@Component
+    @Deprecated
 public class MorphiaDatastore {
     @Value("${mongodb.db}")
     private String dbName;

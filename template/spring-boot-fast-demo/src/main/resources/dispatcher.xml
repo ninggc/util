@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/mvc
+       http://www.springframework.org/schema/mvc/spring-mvc-4.2.xsd
+       http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context-4.2.xsd
+       http://www.springframework.org/schema/aop
+       http://www.springframework.org/schema/aop/spring-aop.xsd">
+  <description>Spring Configuration of Dispatcher</description>
+
+  <!-- 此配置文件是配置需要扫描的控制层类 -->
+  <context:component-scan base-package="com.wondersgroup.bigdata.project.web"/>
+
+  <!--  切入controller层-->
+  <aop:config expose-proxy="true" proxy-target-class="true">
+    <aop:pointcut id="controllers" expression="execution(* com.wondersgroup.bigdata.project.web.*.controller.*..*(..))"/>
+    <!--    <aop:pointcut id="controllers" expression="execution(* com.wondersgroup.bigdata.project.web.test.controller.TestController.aopService(Long, Long, Long))"/>-->
+    <aop:aspect id="aopController" ref="controllerAopConfigurationImpl" order="1">
+      <aop:before method="before" pointcut-ref="controllers"/>
+      <aop:after-returning method="afterReturn" returning="returnValue" pointcut-ref="controllers"/>
+      <aop:after-throwing method="afterThrow" throwing="exception" pointcut-ref="controllers"/>
+    </aop:aspect>
+  </aop:config>
+
+  <!-- 指定数据源的配置文件,此处指定了2个配置文件,分别指定数据库的连接信息和 Hibernate 数据源的配置信息 -->
+  <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+    <property name="locations">
+      <list>
+        <value>classpath:collect/collect.properties</value>
+      </list>
+    </property>
+  </bean>
+
+  <!-- 配置API传输方式 -->
+  <mvc:annotation-driven>
+    <!-- 消息转换器 -->
+    <mvc:message-converters>
+      <ref bean="gsonHttpMessageConverter"/>
+    </mvc:message-converters>
+    <!-- 基本用户信息解析 -->
+    <mvc:argument-resolvers>
+      <bean class="com.wondersgroup.bigdata.user.resolver.BeanArgumentResolver" />
+    </mvc:argument-resolvers>
+  </mvc:annotation-driven>
+
+  <!-- 声明对象转换器 -->
+  <bean id="gsonHttpMessageConverter" class="org.springframework.http.converter.json.GsonHttpMessageConverter">
+    <property name="supportedMediaTypes">
+      <list>
+        <value>application/json;charset=UTF-8</value>
+        <!-- 避免IE出现下载JSON文件的情况 -->
+        <value>text/html;charset=UTF-8</value>
+      </list>
+    </property>
+  </bean>
+
+  <!--<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">-->
+    <!--&lt;!&ndash; 设定默认编码 &ndash;&gt;-->
+    <!--<property name="defaultEncoding" value="UTF-8"></property>-->
+    <!--&lt;!&ndash; 设定文件上传的最大值5MB，5*1024*1024 &ndash;&gt;-->
+    <!--<property name="maxUploadSize" value="5242880"></property>-->
+  <!--</bean>-->
+
+</beans>

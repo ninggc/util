@@ -1,6 +1,6 @@
 package com.ninggc.util.morphia.util;
 
-public enum MorphiaMatchMode {
+public enum MatchMode {
 
     /**
      * Match the entire string to the pattern

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-4.2.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <!-- 指定数据源的配置文件,此处指定了2个配置文件,分别指定数据库的连接信息和 Hibernate 数据源的配置信息 -->
+    <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+<!--                <value>classpath:hibernate/db.properties</value>-->
+            </list>
+        </property>
+    </bean>
+
+    <!-- ********************************** 配置 Spring 对 Service 和 Dao 的管理 - Start ***************************** -->
+
+    <!-- 自动扫描与装配 Service 和 Dao 层的 Bean -->
+<!--    <context:component-scan base-package="com.ninggc.template.springbootfastdemo">-->
+<!--        <context:exclude-filter type="regex" expression=".*Controller$"/>-->
+<!--    </context:component-scan>-->
+
+    <!-- 打印日志 切入service层 -->
+<!--    <aop:config expose-proxy="true" proxy-target-class="true">-->
+<!--        <aop:pointcut id="services" expression="execution(* com.ninggc.template.springbootfastdemo.*.*..*(..))"/>-->
+<!--        <aop:aspect id="aopService" ref="serviceAopConfigurationImpl" order="1">-->
+<!--            <aop:before method="before" pointcut-ref="services"/>-->
+<!--            <aop:after-returning method="afterReturn" returning="returnValue" pointcut-ref="services"/>-->
+<!--            <aop:after-throwing method="afterThrow" throwing="exception" pointcut-ref="services"/>-->
+<!--        </aop:aspect>-->
+<!--    </aop:config>-->
+
+</beans>
