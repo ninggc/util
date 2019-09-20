@@ -13,7 +13,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 public class SpringBootFastDemoApplicationTests {
 
     @Autowired
-    DaoFactory.MorphiaBaseDAO baseDAO;
+    DaoFactory.BaseDAO baseDAO;
 
     @Test
     public void contextLoads() {

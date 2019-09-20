@@ -6,8 +6,8 @@ import com.ninggc.util.morphia.dao.base.impl.MorphiaBaseImpl;
 import org.springframework.stereotype.Service;
 
 public interface DaoFactory {
-    interface MorphiaBaseDAO extends MorphiaBase<BaseEntity> {}
+    interface BaseDAO extends MorphiaBase<BaseEntity> {}
 
     @Service
-    class MorphiaBaseDaoImpl extends MorphiaBaseImpl<BaseEntity> implements MorphiaBaseDAO {}
+    class BaseDAOImpl extends MorphiaBaseImpl<BaseEntity> implements BaseDAO {}
 }

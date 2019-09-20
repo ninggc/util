@@ -11,4 +11,15 @@ public class TestController {
     public String test() {
         return "test";
     }
+
+    @GetMapping("/again")
+    public String again() {
+        return "again";
+    }
+
+    @GetMapping("/sleep")
+    public String sleep() throws InterruptedException {
+        Thread.sleep(500);
+        return "sleep";
+    }
 }

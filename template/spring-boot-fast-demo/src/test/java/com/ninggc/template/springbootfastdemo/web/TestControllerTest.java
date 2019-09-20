@@ -34,4 +34,20 @@ public class TestControllerTest extends AbstractBaseTest {
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andReturn();
     }
+
+    @Test
+    public void again() throws Exception {
+        String url = "/test/again";
+        mockMvc.perform(MockMvcRequestBuilders.get(url).accept(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andReturn();
+    }
+
+    @Test
+    public void sleep() throws Exception {
+        String url = "/test/sleep";
+        mockMvc.perform(MockMvcRequestBuilders.get(url).accept(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andReturn();
+    }
 }

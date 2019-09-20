@@ -16,7 +16,7 @@ import java.util.List;
 public class BaseDaoTest extends AbstractBaseTest {
 
     @Autowired
-    private DaoFactory.MorphiaBaseDAO baseDAO;
+    private DaoFactory.BaseDAO baseDAO;
 
     @Override
     public void before() {
