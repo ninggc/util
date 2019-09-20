@@ -1,6 +1,7 @@
-package com.ninggc.template.springbootfastdemo.web;
+package com.ninggc.template.springbootfastdemo.web.controller;
 
 import com.ninggc.template.springbootfastdemo.AbstractBaseTest;
+import com.ninggc.template.springbootfastdemo.web.AbstractControllerTest;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.PropertySource;
