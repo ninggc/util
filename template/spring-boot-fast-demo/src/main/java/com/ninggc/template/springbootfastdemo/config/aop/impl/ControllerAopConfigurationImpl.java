@@ -1,8 +1,6 @@
-package com.ninggc.template.springbootfastdemo.config.impl;
+package com.ninggc.template.springbootfastdemo.config.aop.impl;
 
-import com.ninggc.template.springbootfastdemo.config.AopConfiguration;
-import org.aspectj.lang.JoinPoint;
-import org.aspectj.lang.ProceedingJoinPoint;
+import com.ninggc.template.springbootfastdemo.config.aop.AopConfiguration;
 import org.aspectj.lang.annotation.*;
 import org.springframework.stereotype.Component;
 

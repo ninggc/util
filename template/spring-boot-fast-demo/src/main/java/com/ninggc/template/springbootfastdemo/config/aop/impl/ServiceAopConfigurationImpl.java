@@ -1,6 +1,6 @@
-package com.ninggc.template.springbootfastdemo.config.impl;
+package com.ninggc.template.springbootfastdemo.config.aop.impl;
 
-import com.ninggc.template.springbootfastdemo.config.AopConfiguration;
+import com.ninggc.template.springbootfastdemo.config.aop.AopConfiguration;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.stereotype.Component;

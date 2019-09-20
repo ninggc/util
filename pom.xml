@@ -16,10 +16,10 @@
     </dependencies>
 
     <modules>
-        <module>morphia</module>
         <module>auto-generate-instance</module>
 
         <module>spring-boot-starter/ninggc-morphia-spring-boot-starter</module>
+        <module>spring-boot-starter/ninggc-morphia</module>
 
         <module>template/spring-boot-fast-demo</module>
     </modules>

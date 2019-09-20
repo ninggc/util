@@ -1,4 +1,4 @@
-package com.ninggc.template.springbootfastdemo.config;
+package com.ninggc.template.springbootfastdemo.config.common;
 
 import com.google.gson.Gson;
 import org.springframework.context.annotation.Bean;

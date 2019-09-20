@@ -5,7 +5,7 @@
 
     <groupId>com.ninggc.morphia.core</groupId>
     <artifactId>ninggc-morphia-spring-boot-starter</artifactId>
-    <version>1.0.1</version>
+    <version>1.0.0</version>
     <name>ninggc-morphia-spring-boot-starter</name>
     <description>Demo project for Spring Boot</description>
 
@@ -16,8 +16,8 @@
     <dependencies>
         <dependency>
             <groupId>com.ninggc.util</groupId>
-            <artifactId>morphia</artifactId>
-            <version>1.0.1</version>
+            <artifactId>ninggc-morphia</artifactId>
+            <version>1.0.0</version>
         </dependency>
     </dependencies>
 

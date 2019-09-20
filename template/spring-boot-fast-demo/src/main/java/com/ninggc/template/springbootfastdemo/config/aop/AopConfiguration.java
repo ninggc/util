@@ -1,6 +1,7 @@
-package com.ninggc.template.springbootfastdemo.config;
+package com.ninggc.template.springbootfastdemo.config.aop;
 
 import com.google.gson.Gson;
+import com.ninggc.template.springbootfastdemo.annotation.MethodLog;
 import lombok.Data;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -13,7 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 /**
  * 控制切面的自定义操作，
@@ -121,7 +121,8 @@ public abstract class AopConfiguration implements ILoggerInfoHandler {
      * 包裹around函数
      * @return
      */
-    @Around("pointCutMethod()")
+//    @Around(value = "pointCutMethod() && @annotation(methodLog)", argNames = "joinPoint")
+    @Around(value = "pointCutMethod()", argNames = "joinPoint")
     public final Object wrapAround(ProceedingJoinPoint joinPoint) throws Throwable {
         String[] parameterNames = ((MethodSignature) joinPoint.getSignature()).getParameterNames();
         Object[] args = joinPoint.getArgs();

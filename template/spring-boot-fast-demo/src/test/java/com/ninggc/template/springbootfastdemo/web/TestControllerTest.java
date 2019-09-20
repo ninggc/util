@@ -15,18 +15,7 @@ import org.springframework.web.context.WebApplicationContext;
 import static org.junit.Assert.*;
 
 @PropertySource("classpath:morphia.properties")
-public class TestControllerTest extends AbstractBaseTest {
-
-    private MockMvc mockMvc;
-
-    @Autowired
-    private WebApplicationContext webApplicationContext;
-
-    @Override
-    public void before() {
-        mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
-    }
-
+public class TestControllerTest extends AbstractControllerTest {
     @Test
     public void test() throws Exception {
         String url = "/test";

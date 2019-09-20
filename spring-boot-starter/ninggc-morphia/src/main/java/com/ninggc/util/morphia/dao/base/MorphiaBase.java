@@ -2,6 +2,7 @@ package com.ninggc.util.morphia.dao.base;
 
 import com.mongodb.MongoException;
 import com.ninggc.util.morphia.dao.base.impl.MorphiaQueryCondition;
+import com.ninggc.util.morphia.util.Page;
 
 import java.io.Serializable;
 import java.util.List;
@@ -46,7 +47,7 @@ public interface MorphiaBase<T> {
      * @param pageNumber 需要查询第几页
      * @return 分页结果对象
      */
-    List<T> findAll(int pageNumber);
+    Page<T> findAll(int pageNumber);
 
     /**
      * <br> 查询全部的记录,以分页方式返回,具体显示哪一页通过 pageNumber 传入,采用指定的页大小(每页 pageSize 条记录)
@@ -54,7 +55,7 @@ public interface MorphiaBase<T> {
      * @param pageSize   每页包含多少条记录
      * @return 分页结果对象
      */
-    List<T> findAll(int pageNumber, int pageSize);
+    Page<T> findAll(int pageNumber, int pageSize);
 
     /**
      * <br> 使用查询对象 QueryCondition 进行 AND 查询
@@ -81,13 +82,6 @@ public interface MorphiaBase<T> {
     List<T> findByAND(int pageNumber, int pageSize, MorphiaQueryCondition queryCondition);
 
     /**
-     * <br> 使用查询对象 QueryCondition 进行 AND 的统计学方式查询
-     * @param queryCondition 查询对象
-     * @return 分页结果对象
-     */
-    Object findByANDWithStatistic(MorphiaQueryCondition queryCondition);
-
-    /**
      * <br> 使用查询对象 QueryCondition 进行 OR 查询
      * @param queryCondition 查询对象
      * @return 对应的查询结果
@@ -100,7 +94,7 @@ public interface MorphiaBase<T> {
      * @param queryCondition 查询对象
      * @return 分页结果对象
      */
-    List<T> findByOR(int pageNumber, MorphiaQueryCondition queryCondition);
+    Page<T> findByOR(int pageNumber, MorphiaQueryCondition queryCondition);
 
     /**
      * <br> 使用查询对象 QueryCondition 进行 OR 查询,具体显示哪一页通过 pageNumber 传入,采用指定的页大小(每页 pageSize 条记录)
@@ -109,14 +103,7 @@ public interface MorphiaBase<T> {
      * @param queryCondition 查询对象
      * @return 分页结果对象
      */
-    List<T> findByOR(int pageNumber, int pageSize, MorphiaQueryCondition queryCondition);
-
-    /**
-     * <br> 使用查询对象 QueryCondition 进行 OR 的统计学方式查询
-     * @param queryCondition 查询对象
-     * @return 分页结果对象
-     */
-    Object findByORWithStatistic(MorphiaQueryCondition queryCondition);
+    Page<T> findByOR(int pageNumber, int pageSize, MorphiaQueryCondition queryCondition);
 
     /**
      * 批量插入

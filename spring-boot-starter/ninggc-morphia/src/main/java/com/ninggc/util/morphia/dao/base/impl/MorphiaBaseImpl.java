@@ -7,12 +7,12 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.model.InsertManyOptions;
 import com.ninggc.util.morphia.dao.base.MorphiaBase;
 import com.ninggc.util.morphia.domain.IMorphiaPO;
+import com.ninggc.util.morphia.util.Page;
 import dev.morphia.Datastore;
 import dev.morphia.query.FindOptions;
 import dev.morphia.query.Query;
 import org.bson.Document;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.io.Serializable;
@@ -59,6 +59,7 @@ public class MorphiaBaseImpl<T extends IMorphiaPO> implements MorphiaBase<T> {
      * 对于morphia的merge操作
      * po的id为null会报MappingException
      * 找不到匹配的id会报UpdateException
+     *
      * @param po 需要持久化的实体类
      * @return 持久化后的类
      */
@@ -70,6 +71,7 @@ public class MorphiaBaseImpl<T extends IMorphiaPO> implements MorphiaBase<T> {
 
     /**
      * 根据id找到数据
+     *
      * @param id 实体类的主键 id 需要是ObjectId类型
      * @return null if not found
      */
@@ -86,13 +88,12 @@ public class MorphiaBaseImpl<T extends IMorphiaPO> implements MorphiaBase<T> {
     /**
      * pageNumber 查询第几页
      * pageSize 每页显示几条 默认十条
+     *
      * @param pageNumber 需要查询第几页
      * @return
      */
     @Override
-    public List<T> findAll(int pageNumber) {
-        //List<T> list = datastore.createQuery(clazz).asList(
-        //          new FindOptions().skip(pageNumber > 0 ?((pageNumber-1)*10) : 0).limit(10));
+    public Page<T> findAll(int pageNumber) {
         return findAll(pageNumber, 10);
     }
 
@@ -103,10 +104,14 @@ public class MorphiaBaseImpl<T extends IMorphiaPO> implements MorphiaBase<T> {
      * @return
      */
     @Override
-    public List<T> findAll(int pageNumber, int pageSize) {
+    public Page<T> findAll(int pageNumber, int pageSize) {
         Query<T> query = datastore.createQuery(clazz);
-        return query.find(new FindOptions().skip(pageNumber > 0 ? ((pageNumber - 1) * pageSize) : 0).limit(pageSize))
+        List<T> list = query.find(new FindOptions().skip(pageNumber > 0 ? ((pageNumber - 1) * pageSize) : 0).limit(pageSize))
                 .toList();
+        return new Page<T>().setCount(query.count())
+                .setPageSize(pageSize)
+                .setPageNumber(pageNumber)
+                .setList(list);
     }
 
     /**
@@ -129,65 +134,58 @@ public class MorphiaBaseImpl<T extends IMorphiaPO> implements MorphiaBase<T> {
     }
 
     @Override
-    public List<T> findByAND(int pageNumber, int pageSize, MorphiaQueryCondition queryCondition) { 
-        return null;
-    }
-
-    @Override
-    public Object findByANDWithStatistic(MorphiaQueryCondition queryCondition) {
+    public List<T> findByAND(int pageNumber, int pageSize, MorphiaQueryCondition queryCondition) {
         return null;
     }
 
     //--
+
     /**
      * 使用查询对象 QueryCondition 进行 OR 查询
+     *
      * @param queryCondition 查询对象
      * @return 查询结果
      */
     @Override
     public List<T> findByOR(MorphiaQueryCondition queryCondition) {
         Query<T> query = datastore.createQuery(clazz);
-        if (null != queryCondition){
+        if (null != queryCondition) {
             query = queryCondition.orCriteria(query);
         }
         return query.find().toList();
     }
 
     /**
-     *
      * @param pageNumber     需要查询第几页
      * @param queryCondition 查询对象
      * @return
      */
     @Override
-    public List<T> findByOR(int pageNumber, MorphiaQueryCondition queryCondition) {
-
+    public Page<T> findByOR(int pageNumber, MorphiaQueryCondition queryCondition) {
         return findByOR(pageNumber, 10, queryCondition);
     }
 
     /**
      * 实现分页逻辑
+     *
      * @param pageNumber     需要查询第几页
      * @param pageSize       每页包含多少条记录
      * @param queryCondition 查询对象
      * @return
      */
     @Override
-    public List<T> findByOR(int pageNumber, int pageSize, MorphiaQueryCondition queryCondition) {
+    public Page<T> findByOR(int pageNumber, int pageSize, MorphiaQueryCondition queryCondition) {
         Query<T> query = datastore.createQuery(clazz);
-        return query.find(new FindOptions().skip(pageNumber > 0 ? ((pageNumber - 1) * pageSize) : 0).limit(pageSize))
+        List<T> list = query.find(new FindOptions().skip(pageNumber > 0 ? ((pageNumber - 1) * pageSize) : 0).limit(pageSize))
                 .toList();
-    }
-
-    //--
-
-    @Override
-    public Object findByORWithStatistic(MorphiaQueryCondition queryCondition) {
-        return null;
+        return new Page<T>().setCount(query.count())
+                .setPageSize(pageSize).setPageNumber(pageNumber)
+                .setList(list);
     }
 
     /**
      * 将PO转到mongodb原生的Document
+     *
      * @return
      */
     private List<Document> posToDocuments(List<T> pos) {

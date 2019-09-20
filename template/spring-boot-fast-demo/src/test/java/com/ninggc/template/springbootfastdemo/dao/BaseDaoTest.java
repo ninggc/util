@@ -55,12 +55,12 @@ public class BaseDaoTest extends AbstractBaseTest {
 
     @Test
     public void findAll1() {
-        List<BaseEntity> all = baseDAO.findAll(10);
+        List<BaseEntity> all = baseDAO.findAll(10).getList();
     }
 
     @Test
     public void findAll2() {
-        List<BaseEntity> all = baseDAO.findAll(10, 3);
+        List<BaseEntity> all = baseDAO.findAll(10, 3).getList();
     }
 
     @Test
@@ -115,7 +115,7 @@ public class BaseDaoTest extends AbstractBaseTest {
     public void findByOR2() {
         MorphiaQueryCondition queryCondition = new MorphiaQueryCondition();
         queryCondition.addEq("deleteFlag", DeleteEnum.NOT.value());
-        List<BaseEntity> byAND = baseDAO.findByOR(1, queryCondition);
+        List<BaseEntity> byAND = baseDAO.findByOR(1, queryCondition).getList();
     }
 
     @Test
