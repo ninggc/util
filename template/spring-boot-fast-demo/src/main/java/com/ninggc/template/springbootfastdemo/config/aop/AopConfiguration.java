@@ -1,7 +1,6 @@
 package com.ninggc.template.springbootfastdemo.config.aop;
 
 import com.google.gson.Gson;
-import com.ninggc.template.springbootfastdemo.annotation.MethodLog;
 import lombok.Data;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -26,7 +25,7 @@ import java.util.List;
  * 3. 配置wrap方法为对应的before、after等
  */
 @SuppressWarnings("unused")
-public abstract class AopConfiguration implements ILoggerInfoHandler {
+public abstract class AopConfiguration implements ILoggerInfoHandler, IAopConfiguration {
     //    不发出警告的程序最大执行时间，单位ms
     private long timeThreshold;
 //    日志打印的标签
@@ -62,15 +61,7 @@ public abstract class AopConfiguration implements ILoggerInfoHandler {
     public final void wrapBefore(JoinPoint joinPoint) {
         String[] parameterNames = ((MethodSignature) joinPoint.getSignature()).getParameterNames();
         Object[] args = joinPoint.getArgs();
-        before(joinPoint, parameterNames, args);
-    }
-
-    public void before(JoinPoint joinPoint, String[] parameterNames, Object[] args) {
-        String classAndMethodName = joinPoint.getSignature().toShortString();
-
-        String logContent = "before " + tag + " execute: " + classAndMethodName + "\t" +
-                gson.toJson(parameterNames) + " --> " + gson.toJson(args);
-        log(logContent);
+        doBefore(joinPoint, parameterNames, args);
     }
 
     /**
@@ -78,22 +69,7 @@ public abstract class AopConfiguration implements ILoggerInfoHandler {
      */
 //    @AfterReturning(value = "pointCutMethod()", returning = "returnValue")
     public final Object wrapAfterReturn(JoinPoint joinPoint, Object returnValue) {
-        Object o = afterReturn(joinPoint, returnValue);
-        return o;
-    }
-
-    /**
-     * @param joinPoint
-     * @param returnValue 返回值
-     * @return
-     */
-    public Object afterReturn(JoinPoint joinPoint, final Object returnValue) {
-        String classAndMethodName = joinPoint.getSignature().toShortString();
-
-        String logContent = "after " + tag + " execute: " + classAndMethodName + "\t"
-                + "result --> " + gson.toJson(getResultToAopResult(returnValue));
-        log(logContent);
-        return returnValue;
+        return doAfterReturn(joinPoint, returnValue);
     }
 
     /**
@@ -101,20 +77,7 @@ public abstract class AopConfiguration implements ILoggerInfoHandler {
      */
 //    @AfterThrowing(value = "pointCutMethod()", throwing = "exception")
     public final void wrapAfterThrow(JoinPoint joinPoint, Exception exception) throws Exception {
-        afterThrow(joinPoint, exception);
-    }
-
-    /**
-     * @param joinPoint
-     * @param exception 抛出的异常
-     * @throws Exception 处理之后要再次抛出
-     */
-    public void afterThrow(JoinPoint joinPoint, Exception exception) throws Exception {
-        String classAndMethodName = joinPoint.getSignature().toShortString();
-        String logContent = "after " + tag + " execute: " + classAndMethodName + "\t"
-                + "throw --> " + gson.toJson(exception.getMessage());
-        log(logContent);
-        throw exception;
+        doAfterThrow(joinPoint, exception);
     }
 
     /**
@@ -123,32 +86,63 @@ public abstract class AopConfiguration implements ILoggerInfoHandler {
      */
 //    @Around(value = "pointCutMethod() && @annotation(methodLog)", argNames = "joinPoint")
     @Around(value = "pointCutMethod()", argNames = "joinPoint")
-    public final Object wrapAround(ProceedingJoinPoint joinPoint) throws Throwable {
+    private Object wrapAround(ProceedingJoinPoint joinPoint) throws Throwable {
         String[] parameterNames = ((MethodSignature) joinPoint.getSignature()).getParameterNames();
         Object[] args = joinPoint.getArgs();
+        return doAround(joinPoint, parameterNames, args);
+    }
+
+    private void doBefore(JoinPoint joinPoint, String[] parameterNames, Object[] args) {
+        before(joinPoint, parameterNames, args);
+        String classAndMethodName = joinPoint.getSignature().toShortString();
+
+        String logContent = "before " + tag + " execute: " + classAndMethodName + "\t" +
+                gson.toJson(parameterNames) + " --> " + gson.toJson(args);
+        log(logContent);
+    }
+
+    private Object doAfterReturn(JoinPoint joinPoint, final Object returnValue) {
+        afterReturn(joinPoint, returnValue);
+        String classAndMethodName = joinPoint.getSignature().toShortString();
+
+        String logContent = "after " + tag + " execute: " + classAndMethodName + "\t"
+                + "result --> " + gson.toJson(getResultToAopResult(returnValue));
+        log(logContent);
+        return returnValue;
+    }
+
+    private void doAfterThrow(JoinPoint joinPoint, Exception exception) throws Exception {
+        afterThrow(joinPoint, exception);
+        String classAndMethodName = joinPoint.getSignature().toShortString();
+        String logContent = "after " + tag + " execute: " + classAndMethodName + "\t"
+                + "throw --> " + gson.toJson(exception.getMessage());
+        log(logContent);
+        throw exception;
+    }
+
+    private Object doAround(ProceedingJoinPoint joinPoint, String[] parameterNames, Object[] args) throws Throwable {
         String classAndMethodName = joinPoint.getSignature().toShortString();
         Object returnValue = null;
 
 //        执行切点
         try {
-            before(joinPoint, parameterNames, args);
+            doBefore(joinPoint, parameterNames, args);
+
             long start = System.currentTimeMillis();
-            returnValue = around(joinPoint, parameterNames, args);
+            returnValue = joinPoint.proceed(args);
             long duration = System.currentTimeMillis() - start;
             if (duration > timeThreshold) {
                 warn( classAndMethodName + " execute time is too long: " + " --> " + duration + " ms");
             } else {
                 log(classAndMethodName + " execute time: " + " --> " + duration + " ms");
             }
-            afterReturn(joinPoint, returnValue);
+
+            doAfterReturn(joinPoint, returnValue);
         } catch (Exception e) {
+            doAfterThrow(joinPoint, e);
             afterThrow(joinPoint, e);
             throw e;
         }
-        return returnValue;
-    }
-
-    public Object around(ProceedingJoinPoint joinPoint, String[] parameterNames, Object[] args) throws Throwable {
         return joinPoint.proceed(args);
     }
 

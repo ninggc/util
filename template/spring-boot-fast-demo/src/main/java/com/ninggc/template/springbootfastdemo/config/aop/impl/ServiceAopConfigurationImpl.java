@@ -1,6 +1,7 @@
 package com.ninggc.template.springbootfastdemo.config.aop.impl;
 
 import com.ninggc.template.springbootfastdemo.config.aop.AopConfiguration;
+import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.stereotype.Component;
@@ -18,5 +19,20 @@ public class ServiceAopConfigurationImpl extends AopConfiguration {
     @Override
     public String getTag() {
         return "service";
+    }
+
+    @Override
+    public void before(JoinPoint joinPoint, String[] parameterNames, Object[] args) {
+
+    }
+
+    @Override
+    public void afterReturn(JoinPoint joinPoint, Object returnValue) {
+
+    }
+
+    @Override
+    public void afterThrow(JoinPoint joinPoint, Exception exception) throws Exception {
+
     }
 }
