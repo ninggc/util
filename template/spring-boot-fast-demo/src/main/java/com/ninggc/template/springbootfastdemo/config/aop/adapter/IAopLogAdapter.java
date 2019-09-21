@@ -1,5 +1,6 @@
 package com.ninggc.template.springbootfastdemo.config.aop.adapter;
 
+import com.ninggc.template.springbootfastdemo.config.aop.IAopLoggerHandler;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 
@@ -11,4 +12,6 @@ public interface IAopLogAdapter {
     void doAfterThrow(JoinPoint joinPoint, Exception exception) throws Exception;
 
     Object doAround(ProceedingJoinPoint joinPoint, String[] parameterNames, Object[] args) throws Throwable;
+
+    void setAopLoggerHandler(IAopLoggerHandler aopLoggerHandler);
 }

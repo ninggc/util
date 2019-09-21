@@ -8,15 +8,13 @@ import org.apache.logging.log4j.Logger;
 import java.util.Arrays;
 import java.util.Collection;
 
-public interface ILoggerInfoHandler extends IGson {
+public interface IAopLoggerHandler extends IGson {
 //    自定义输出日志的标签
     String getTag();
     //    自定义不发出警告的程序最大执行时间，单位ms，默认未300
     default Long getTimeThreshold() {
         return 500L;
     }
-
-    Logger logger = LogManager.getLogger(LogManager.ROOT_LOGGER_NAME);
 
     /**
      * 如果结果是非常长的list，就要截取一部分打印到日志
@@ -46,15 +44,4 @@ public interface ILoggerInfoHandler extends IGson {
         return resultValue;
     }
 
-    default void log(String content) {
-        logger.info(content);
-    }
-
-    default void warn(String content) {
-        logger.warn(content);
-    }
-
-    default void error(String content) {
-        logger.error(content);
-    }
 }

@@ -12,7 +12,6 @@ import org.springframework.stereotype.Component;
 @Component
 @Aspect
 public class DaoAopConfigurationImpl extends AopConfiguration {
-
     public DaoAopConfigurationImpl(IAopLogAdapter aopLogAdapter) {
         super(aopLogAdapter);
     }

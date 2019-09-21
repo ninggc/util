@@ -1,7 +1,9 @@
 package com.ninggc.template.springbootfastdemo.config.aop.impl;
 
 import com.ninggc.template.springbootfastdemo.config.aop.AopConfiguration;
+import com.ninggc.template.springbootfastdemo.config.aop.IAopLoggerHandler;
 import com.ninggc.template.springbootfastdemo.config.aop.adapter.IAopLogAdapter;
+import com.ninggc.template.springbootfastdemo.config.aop.adapter.impl.DefaultAopLogAdapter;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
@@ -19,7 +21,8 @@ public class ControllerAopConfigurationImpl extends AopConfiguration {
 
     @Pointcut("execution(* com.ninggc.template.springbootfastdemo.web.controller.*..*(..))")
     @Override
-    protected void pointCutMethod() { }
+    protected void pointCutMethod() {
+    }
 
     @Override
     public String getTag() {

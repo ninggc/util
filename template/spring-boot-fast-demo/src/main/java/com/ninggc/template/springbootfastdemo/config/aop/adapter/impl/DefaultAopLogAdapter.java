@@ -1,17 +1,26 @@
 package com.ninggc.template.springbootfastdemo.config.aop.adapter.impl;
 
 import com.ninggc.template.springbootfastdemo.config.IGson;
-import com.ninggc.template.springbootfastdemo.config.aop.ILoggerInfoHandler;
+import com.ninggc.template.springbootfastdemo.config.aop.IAopLoggerHandler;
+import com.ninggc.template.springbootfastdemo.config.aop.ILoggerUtil;
 import com.ninggc.template.springbootfastdemo.config.aop.adapter.IAopLogAdapter;
+import com.sun.deploy.net.protocol.ProtocolType;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 @Component
-public class DefaultAopLogAdapter implements IAopLogAdapter, ILoggerInfoHandler, IGson {
-    @Override
-    public String getTag() {
-        return "default";
+@Scope("prototype")
+public class DefaultAopLogAdapter implements IAopLogAdapter, ILoggerUtil, IGson {
+    private IAopLoggerHandler aopLoggerHandler;
+
+    public DefaultAopLogAdapter() {
+        this(() -> "default");
+    }
+
+    public DefaultAopLogAdapter(IAopLoggerHandler aopLoggerHandler) {
+        this.aopLoggerHandler = aopLoggerHandler;
     }
 
     @Override
@@ -19,7 +28,7 @@ public class DefaultAopLogAdapter implements IAopLogAdapter, ILoggerInfoHandler,
 //        before(joinPoint, parameterNames, args);
         String classAndMethodName = joinPoint.getSignature().toShortString();
 
-        String logContent = "before " + getTag() + " execute: " + classAndMethodName + "\t" +
+        String logContent = "before " + aopLoggerHandler.getTag() + " execute: " + classAndMethodName + "\t" +
                 gson.toJson(parameterNames) + " --> " + gson.toJson(args);
         log(logContent);
     }
@@ -29,8 +38,8 @@ public class DefaultAopLogAdapter implements IAopLogAdapter, ILoggerInfoHandler,
 //        afterReturn(joinPoint, returnValue);
         String classAndMethodName = joinPoint.getSignature().toShortString();
 
-        String logContent = "after " + getTag() + " execute: " + classAndMethodName + "\t"
-                + "result --> " + gson.toJson(getResultToAopResult(returnValue));
+        String logContent = "after " + aopLoggerHandler.getTag() + " execute: " + classAndMethodName + "\t"
+                + "result --> " + gson.toJson(aopLoggerHandler.getResultToAopResult(returnValue));
         log(logContent);
         return returnValue;
     }
@@ -39,7 +48,7 @@ public class DefaultAopLogAdapter implements IAopLogAdapter, ILoggerInfoHandler,
     public void doAfterThrow(JoinPoint joinPoint, Exception exception) throws Exception {
 //        afterThrow(joinPoint, exception);
         String classAndMethodName = joinPoint.getSignature().toShortString();
-        String logContent = "after " + getTag() + " execute: " + classAndMethodName + "\t"
+        String logContent = "after " + aopLoggerHandler.getTag() + " execute: " + classAndMethodName + "\t"
                 + "throw --> " + gson.toJson(exception.getMessage());
         log(logContent);
         throw exception;
@@ -57,7 +66,7 @@ public class DefaultAopLogAdapter implements IAopLogAdapter, ILoggerInfoHandler,
             long start = System.currentTimeMillis();
             returnValue = joinPoint.proceed(args);
             long duration = System.currentTimeMillis() - start;
-            if (duration > getTimeThreshold()) {
+            if (duration > aopLoggerHandler.getTimeThreshold()) {
                 warn( classAndMethodName + " execute time is too long: " + " --> " + duration + " ms");
             } else {
                 log(classAndMethodName + " execute time: " + " --> " + duration + " ms");
@@ -69,5 +78,10 @@ public class DefaultAopLogAdapter implements IAopLogAdapter, ILoggerInfoHandler,
             throw e;
         }
         return returnValue;
+    }
+
+    @Override
+    public void setAopLoggerHandler(IAopLoggerHandler aopLoggerHandler) {
+        this.aopLoggerHandler = aopLoggerHandler;
     }
 }

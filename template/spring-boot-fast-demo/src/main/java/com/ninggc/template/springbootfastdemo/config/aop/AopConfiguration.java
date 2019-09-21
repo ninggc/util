@@ -27,11 +27,12 @@ import java.util.List;
  * 3. 配置wrap方法为对应的before、after等
  */
 @SuppressWarnings("unused")
-public abstract class AopConfiguration implements ILoggerInfoHandler, IGson {
+public abstract class AopConfiguration implements IGson, IAopLoggerHandler {
     private IAopLogAdapter adapter;
 
     public AopConfiguration(IAopLogAdapter aopLogAdapter) {
         this.adapter = aopLogAdapter;
+        aopLogAdapter.setAopLoggerHandler(this);
     }
 
     private Logger logger = LogManager.getLogger(LogManager.ROOT_LOGGER_NAME);
