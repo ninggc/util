@@ -15,13 +15,7 @@ import org.springframework.stereotype.Component;
 public class DefaultAopLogAdapter implements IAopLogAdapter, ILoggerUtil, IGson {
     private IAopLoggerHandler aopLoggerHandler;
 
-    public DefaultAopLogAdapter() {
-        this(() -> "default");
-    }
-
-    public DefaultAopLogAdapter(IAopLoggerHandler aopLoggerHandler) {
-        this.aopLoggerHandler = aopLoggerHandler;
-    }
+    public DefaultAopLogAdapter() { }
 
     @Override
     public void doBefore(JoinPoint joinPoint, String[] parameterNames, Object[] args) {
