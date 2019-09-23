@@ -14,11 +14,13 @@ public class AutoGeneration {
             for (Field item : clazz.getDeclaredFields()) {
                 Field field = clazz.getDeclaredField(item.getName());
                 Type genericType = field.getGenericType();
-                if (!genericType.getTypeName().equals(String.class.getName())) {
-                    continue;
+                if (genericType.getTypeName().equals(String.class.getName())) {
+                    field.setAccessible(true);
+                    field.set(t, randomFactory.getString(randomFactory.getInt(1, 10)));
+                } if (genericType.getTypeName().equals(Integer.class.getName())) {
+                    field.setAccessible(true);
+                    field.set(t, randomFactory.getInt(1, 10));
                 }
-                field.setAccessible(true);
-                field.set(t, randomFactory.getString(randomFactory.getInt(1, 10)));
             }
         } catch (NoSuchFieldException | IllegalAccessException | InstantiationException e) {
             e.printStackTrace();

@@ -1,8 +1,10 @@
 package com.ninggc.template.springbootfastdemo.common.config.aop;
 
+import com.ninggc.util.autogenerate.AutoGeneration;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
+import java.io.Serializable;
 import java.util.List;
 
 @Data
