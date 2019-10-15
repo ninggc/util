@@ -12,16 +12,16 @@ import dev.morphia.Datastore;
 import dev.morphia.query.FindOptions;
 import dev.morphia.query.Query;
 import org.bson.Document;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 
-import javax.annotation.Resource;
 import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
 import java.util.ArrayList;
 import java.util.List;
 
 public class MorphiaBaseImpl<T extends IMorphiaPO> implements MorphiaBase<T> {
-    @Resource
+    @Autowired
     private Datastore datastore;
 
     /**
