@@ -4,6 +4,9 @@ import com.ninggc.template.springbootfastdemo.common.config.aop.IAopLoggerHandle
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 
+/**
+ * 这里推荐只是用doAround的实现
+ */
 public interface IAopAdapter {
     void doBefore(JoinPoint joinPoint, String[] parameterNames, Object[] args);
 

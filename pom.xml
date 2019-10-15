@@ -18,6 +18,8 @@
     <modules>
         <module>auto-generate-instance</module>
 
+        <module>db-base/hibernate-base</module>
+
         <module>spring-boot-starter/ninggc-morphia-spring-boot-starter</module>
         <module>spring-boot-starter/ninggc-morphia</module>
 

@@ -14,15 +14,16 @@ import org.springframework.stereotype.Component;
 public class DefaultAopLogAdapter implements IAopAdapter, IUtilLogger, IUtilGson {
     private IAopLoggerHandler aopLoggerHandler;
 
-    public DefaultAopLogAdapter() { }
+    public DefaultAopLogAdapter() {
+    }
 
     @Override
     public void doBefore(JoinPoint joinPoint, String[] parameterNames, Object[] args) {
 //        before(joinPoint, parameterNames, args);
         String classAndMethodName = joinPoint.getSignature().toShortString();
 
-        String logContent = "before " + aopLoggerHandler.getTag() + " execute: " + classAndMethodName + "\t" +
-                gson.toJson(parameterNames) + " --> " + gson.toJson(args);
+        String logContent = "——————" + "before " + aopLoggerHandler.getTag() + " execute: " + classAndMethodName + "——————";
+        logContent += gson.toJson(parameterNames) + " --> " + gson.toJson(args);
         log(logContent);
     }
 
@@ -31,8 +32,8 @@ public class DefaultAopLogAdapter implements IAopAdapter, IUtilLogger, IUtilGson
 //        afterReturn(joinPoint, returnValue);
         String classAndMethodName = joinPoint.getSignature().toShortString();
 
-        String logContent = "after " + aopLoggerHandler.getTag() + " execute: " + classAndMethodName + "\t"
-                + "result --> " + gson.toJson(aopLoggerHandler.getResultToAopResult(returnValue));
+        String logContent = "——————" + "after " + aopLoggerHandler.getTag() + " execute: " + classAndMethodName + "——————";
+        logContent += " result --> " + gson.toJson(aopLoggerHandler.getResultToAopResult(returnValue));
         log(logContent);
         return returnValue;
     }
@@ -41,8 +42,8 @@ public class DefaultAopLogAdapter implements IAopAdapter, IUtilLogger, IUtilGson
     public void doAfterThrow(JoinPoint joinPoint, Exception exception) throws Exception {
 //        afterThrow(joinPoint, exception);
         String classAndMethodName = joinPoint.getSignature().toShortString();
-        String logContent = "after " + aopLoggerHandler.getTag() + " execute: " + classAndMethodName + "\t"
-                + "throw --> " + gson.toJson(exception.getMessage());
+        String logContent = "——————" + "after " + aopLoggerHandler.getTag() + " throw: " + classAndMethodName + "——————";
+        logContent += " throw --> " + gson.toJson(exception.getMessage());
         log(logContent);
         throw exception;
     }
@@ -60,7 +61,7 @@ public class DefaultAopLogAdapter implements IAopAdapter, IUtilLogger, IUtilGson
             returnValue = joinPoint.proceed(args);
             long duration = System.currentTimeMillis() - start;
             if (duration > aopLoggerHandler.getTimeThreshold()) {
-                warn( classAndMethodName + " execute time is too long: " + " --> " + duration + " ms");
+                warn(classAndMethodName + " execute time is too long: " + " --> " + duration + " ms");
             } else {
                 log(classAndMethodName + " execute time: " + " --> " + duration + " ms");
             }
