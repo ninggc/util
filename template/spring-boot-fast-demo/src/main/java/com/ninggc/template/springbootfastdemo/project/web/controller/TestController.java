@@ -21,8 +21,7 @@ public class TestController {
 
     @MethodLog
     @GetMapping("")
-//    @MethodLog(value = "test", clazz = TestController.class)
-    public String test() {
+    public String test(StringFO stringFO) {
         return "test";
     }
 

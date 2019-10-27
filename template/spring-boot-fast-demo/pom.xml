@@ -66,6 +66,11 @@
             <version>2.1.10.RELEASE</version>
             <scope>compile</scope>
         </dependency>
+        <dependency>
+            <groupId>com.ninggc.common</groupId>
+            <artifactId>web-common</artifactId>
+            <version>1.0.0</version>
+        </dependency>
     </dependencies>
 
     <build>

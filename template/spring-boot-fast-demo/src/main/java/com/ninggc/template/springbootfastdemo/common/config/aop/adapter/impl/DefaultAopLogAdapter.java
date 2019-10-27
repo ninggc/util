@@ -1,15 +1,10 @@
 package com.ninggc.template.springbootfastdemo.common.config.aop.adapter.impl;
 
 import com.ninggc.template.springbootfastdemo.common.config.aop.AopAdapter;
-import com.ninggc.template.springbootfastdemo.common.config.aop.IAopLoggerHandler;
+import com.ninggc.template.springbootfastdemo.common.config.aop.logger.IAopLoggerHandler;
 import com.ninggc.template.springbootfastdemo.common.config.aop.adapter.IAopAdapter;
 import com.ninggc.template.springbootfastdemo.common.util.IUtilGson;
-import com.ninggc.template.springbootfastdemo.common.util.IUtilLogger;
 import org.aspectj.lang.JoinPoint;
-import org.aspectj.lang.ProceedingJoinPoint;
-import org.springframework.beans.factory.BeanNameAware;
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
 
 @AopAdapter
 public class DefaultAopLogAdapter implements IAopAdapter, IUtilGson {

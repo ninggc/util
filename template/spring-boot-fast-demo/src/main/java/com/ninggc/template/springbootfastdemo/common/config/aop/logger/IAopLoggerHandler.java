@@ -1,4 +1,4 @@
-package com.ninggc.template.springbootfastdemo.common.config.aop;
+package com.ninggc.template.springbootfastdemo.common.config.aop.logger;
 
 import com.ninggc.template.springbootfastdemo.common.util.IUtilGson;
 

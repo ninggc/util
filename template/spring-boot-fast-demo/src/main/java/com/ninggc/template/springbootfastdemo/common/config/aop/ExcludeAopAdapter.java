@@ -13,7 +13,7 @@ import java.lang.annotation.Target;
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 /**
- * 标记具体的切面不执行的adapter
+ * 在切面标记不执行的adapter
  */
 public @interface ExcludeAopAdapter {
     Class<? extends IAopAdapter>[] excludeClasses();
