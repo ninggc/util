@@ -1,6 +1,6 @@
 package com.ninggc.template.springbootfastdemo.project.util;
 
-import com.ninggc.template.springbootfastdemo.project.annotation.MethodLog;
+import com.ninggc.template.springbootfastdemo.common.config.aop.MethodLog;
 import org.springframework.stereotype.Component;
 
 @Component

@@ -1,4 +1,4 @@
-package com.ninggc.template.springbootfastdemo.project.annotation;
+package com.ninggc.template.springbootfastdemo.common.config.aop;
 
 import org.springframework.core.annotation.AliasFor;
 

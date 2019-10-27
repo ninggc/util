@@ -11,10 +11,6 @@ import org.springframework.stereotype.Component;
 @Component
 @Aspect
 public class DaoAopLoggerConfigurationImpl extends AopConfiguration {
-    public DaoAopLoggerConfigurationImpl(IAopAdapter aopLogAdapter) {
-        super(aopLogAdapter);
-    }
-
     @Pointcut("execution(* com.ninggc.template.springbootfastdemo.project.dao.DaoFactory.*..*(..))")
     protected void pointCutMethod() { }
 

@@ -12,9 +12,6 @@ import org.springframework.stereotype.Component;
 @Component
 @Aspect
 public class ServiceAopLoggerConfigurationImpl extends AopConfiguration {
-    public ServiceAopLoggerConfigurationImpl(IAopAdapter aopLogAdapter) {
-        super(aopLogAdapter);
-    }
 
     @Pointcut("execution(* com.ninggc.template.springbootfastdemo.project.service.impl.*..*(..))")
     protected void pointCutMethod() { }

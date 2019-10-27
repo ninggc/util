@@ -6,8 +6,11 @@ import java.util.Arrays;
 import java.util.Collection;
 
 public interface IAopLoggerHandler extends IUtilGson {
-//    自定义输出日志的标签
-    String getTag();
+    //    自定义输出日志的标签
+    default String getTag() {
+        return "null";
+    }
+
     //    自定义不发出警告的程序最大执行时间，单位ms，默认未300
     default Long getTimeThreshold() {
         return 500L;

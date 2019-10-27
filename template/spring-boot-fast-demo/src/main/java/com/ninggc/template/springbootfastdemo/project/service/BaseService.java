@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface BaseService {
     List<BaseEntity> getAll();
+
+    BaseEntity save(BaseEntity baseEntity);
 }

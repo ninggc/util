@@ -9,12 +9,9 @@ import org.springframework.stereotype.Component;
 @Component
 @Aspect
 public class CustomAopConfigurationImpl extends AopConfiguration {
-    public CustomAopConfigurationImpl(IAopAdapter aopLogAdapter) {
-        super(aopLogAdapter);
-    }
 
     @Override
-    @Pointcut("@annotation(com.ninggc.template.springbootfastdemo.project.annotation.MethodLog)")
+    @Pointcut("@annotation(com.ninggc.template.springbootfastdemo.common.config.aop.MethodLog)")
     protected void pointCutMethod() { }
 
     @Override

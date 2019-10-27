@@ -1,7 +1,9 @@
 package com.ninggc.template.springbootfastdemo.project.config.aop;
 
 import com.ninggc.template.springbootfastdemo.common.config.aop.AopConfiguration;
+import com.ninggc.template.springbootfastdemo.common.config.aop.ExcludeAopAdapter;
 import com.ninggc.template.springbootfastdemo.common.config.aop.adapter.IAopAdapter;
+import com.ninggc.template.springbootfastdemo.common.config.aop.adapter.impl.JustTestAopAdapter;
 import org.aspectj.lang.annotation.*;
 import org.springframework.stereotype.Component;
 
@@ -10,10 +12,8 @@ import org.springframework.stereotype.Component;
  */
 @Component
 @Aspect
+@ExcludeAopAdapter(excludeClasses = JustTestAopAdapter.class)
 public class ControllerAopLoggerConfigurationImpl extends AopConfiguration {
-    public ControllerAopLoggerConfigurationImpl(IAopAdapter aopLogAdapter) {
-        super(aopLogAdapter);
-    }
 
     @Pointcut("execution(* com.ninggc.template.springbootfastdemo.project.web.controller.*..*(..))")
     @Override

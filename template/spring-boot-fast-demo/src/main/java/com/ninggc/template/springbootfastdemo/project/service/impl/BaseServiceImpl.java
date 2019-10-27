@@ -20,4 +20,9 @@ public class BaseServiceImpl implements BaseService {
     public List<BaseEntity> getAll() {
         return baseDAO.findAll();
     }
+
+    @Override
+    public BaseEntity save(BaseEntity baseEntity) {
+        return baseDAO.save(baseEntity);
+    }
 }
