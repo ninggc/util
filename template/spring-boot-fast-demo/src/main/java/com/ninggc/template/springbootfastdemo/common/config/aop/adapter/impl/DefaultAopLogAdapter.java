@@ -12,7 +12,6 @@ public class DefaultAopLogAdapter implements IAopAdapter, IUtilGson {
 
     @Override
     public void doBefore(JoinPoint joinPoint, String[] parameterNames, Object[] args) {
-//        before(joinPoint, parameterNames, args);
         String classAndMethodName = joinPoint.getSignature().toShortString();
 
         String logContent = "——————" + "before " + aopLoggerHandler.getTag() + " execute: " + classAndMethodName + "——————";
@@ -22,7 +21,6 @@ public class DefaultAopLogAdapter implements IAopAdapter, IUtilGson {
 
     @Override
     public Object doAfterReturn(JoinPoint joinPoint, Object returnValue) {
-//        afterReturn(joinPoint, returnValue);
         String classAndMethodName = joinPoint.getSignature().toShortString();
 
         String logContent = "——————" + "after " + aopLoggerHandler.getTag() + " execute: " + classAndMethodName + "——————";
@@ -33,7 +31,6 @@ public class DefaultAopLogAdapter implements IAopAdapter, IUtilGson {
 
     @Override
     public void doAfterThrow(JoinPoint joinPoint, Exception exception) throws Exception {
-//        afterThrow(joinPoint, exception);
         String classAndMethodName = joinPoint.getSignature().toShortString();
         String logContent = "——————" + "after " + aopLoggerHandler.getTag() + " throw: " + classAndMethodName + "——————";
         logContent += " throw --> " + gson.toJson(exception.getMessage());
