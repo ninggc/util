@@ -6,7 +6,10 @@ import com.ninggc.template.springbootfastdemo.common.config.aop.adapter.IAopAdap
 import com.ninggc.template.springbootfastdemo.common.security.Valid;
 import com.ninggc.template.springbootfastdemo.project.web.controller.fo.IVO;
 import org.aspectj.lang.JoinPoint;
+import org.springframework.util.Assert;
 
+import javax.validation.constraints.NotNull;
+import java.lang.reflect.Field;
 import java.util.Map;
 
 /**
@@ -17,6 +20,14 @@ public class ValidateAndFormatAopAdapter implements IAopAdapter {
     @Override
     public void doBefore(JoinPoint joinPoint, String[] parameterNames, Object[] args) {
         for (Object arg : args) {
+            for (Field field : arg.getClass().getDeclaredFields()) {
+                if (field.getAnnotation(NotNull.class) != null) {
+                    try {
+                        field.setAccessible(true);
+                        Assert.notNull(field.get(arg), field.getName() + " cannot be null!");
+                    } catch (IllegalAccessException ignored) { }
+                }
+            }
             if (arg instanceof Valid) {
                 ((Valid) arg).validate();
             }

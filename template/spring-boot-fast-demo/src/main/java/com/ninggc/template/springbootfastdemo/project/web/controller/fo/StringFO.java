@@ -4,13 +4,16 @@ import com.ninggc.template.springbootfastdemo.common.security.Valid;
 import lombok.Data;
 import org.springframework.util.Assert;
 
+import javax.validation.constraints.NotNull;
+
 @Data
 public class StringFO implements Valid {
 
+    @NotNull
     private String str;
 
     @Override
     public void validate() throws IllegalArgumentException {
-        Assert.hasLength(str, "str should not be null or blank");
+//        Assert.hasLength(str, "str should not be null or blank");
     }
 }
