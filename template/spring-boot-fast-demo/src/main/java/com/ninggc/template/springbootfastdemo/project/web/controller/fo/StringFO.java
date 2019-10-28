@@ -1,4 +1,4 @@
-package com.ninggc.template.springbootfastdemo.project.web.controller;
+package com.ninggc.template.springbootfastdemo.project.web.controller.fo;
 
 import com.ninggc.template.springbootfastdemo.common.security.Valid;
 import lombok.Data;

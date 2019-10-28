@@ -5,8 +5,8 @@ import com.ninggc.template.springbootfastdemo.project.entity.UserEntity;
 
 import java.util.List;
 
-public interface BaseService {
-    List<BaseEntity> getAll();
+public interface UserService {
+    List<UserEntity> getAll();
 
-    BaseEntity save(BaseEntity baseEntity);
+    UserEntity save(UserEntity entity);
 }

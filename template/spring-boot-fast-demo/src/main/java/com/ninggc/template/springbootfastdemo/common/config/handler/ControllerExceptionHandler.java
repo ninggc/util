@@ -11,6 +11,7 @@ public class ControllerExceptionHandler {
     @ExceptionHandler(value = Exception.class)
     public ResponseData<Object> handException(Exception e) {
         // 在这里可以对相应的异常进行封装
+        e.printStackTrace();
         return ResponseData.buildFailed(e.getMessage());
     }
 }
