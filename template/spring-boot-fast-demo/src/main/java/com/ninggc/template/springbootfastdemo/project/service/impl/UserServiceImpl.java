@@ -26,4 +26,6 @@ public class UserServiceImpl implements UserService {
     public UserEntity save(UserEntity entity) {
         return userDAO.save(entity);
     }
+
+
 }
