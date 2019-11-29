@@ -26,6 +26,7 @@
         <module>spring-boot-starter/ninggc-morphia-spring-boot-starter</module>
 
         <module>template/spring-boot-fast-demo</module>
+        <module>template/merge-mongo</module>
     </modules>
 
     <build>
