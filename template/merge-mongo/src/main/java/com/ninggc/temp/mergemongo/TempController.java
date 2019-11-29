@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Stream;
 
 @RestController
 @RequestMapping("/temp")
@@ -32,8 +33,10 @@ public class TempController {
     }
 
     @GetMapping("/findAllId/{coll}")
-    public List<OnlyId> findAllId(@PathVariable String coll) {
-        return mongoTemplate.findAll(OnlyId.class, coll);
+    public Stream<String> findAllId(@PathVariable String coll) {
+        return mongoTemplate.findAll(OnlyId.class, coll)
+                .stream()
+                .map(OnlyId::getId);
     }
 
 
