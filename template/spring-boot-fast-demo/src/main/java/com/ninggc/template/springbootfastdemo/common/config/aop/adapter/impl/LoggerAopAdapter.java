@@ -5,9 +5,12 @@ import com.ninggc.template.springbootfastdemo.common.config.aop.logger.IAopLogge
 import com.ninggc.template.springbootfastdemo.common.config.aop.adapter.IAopAdapter;
 import com.ninggc.template.springbootfastdemo.common.util.IUtilGson;
 import org.aspectj.lang.JoinPoint;
+import org.springframework.context.annotation.Scope;
+import org.springframework.util.Assert;
 
 @AopAdapter
-public class DefaultAopLogAdapter implements IAopAdapter, IUtilGson {
+@Scope("prototype")
+public class LoggerAopAdapter implements IAopAdapter, IUtilGson {
     private IAopLoggerHandler aopLoggerHandler;
 
     @Override
@@ -39,7 +42,8 @@ public class DefaultAopLogAdapter implements IAopAdapter, IUtilGson {
     }
 
     @Override
-    public void setAopLoggerHandler(IAopLoggerHandler aopLoggerHandler) {
-        this.aopLoggerHandler = aopLoggerHandler;
+    public void initAopAdapter(Object... objects) {
+        Assert.isTrue(objects.length == 1, "初始化" + this.getClass().getName() + "的参数不正确");
+        this.aopLoggerHandler = (IAopLoggerHandler) objects[0];
     }
 }

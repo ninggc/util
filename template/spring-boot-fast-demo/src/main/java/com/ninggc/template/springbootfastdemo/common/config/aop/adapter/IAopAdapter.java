@@ -14,5 +14,5 @@ public interface IAopAdapter extends IAopLoggerHandler, IUtilLogger {
 
     void doAfterThrow(JoinPoint joinPoint, Exception exception) throws Exception;
 
-    default void setAopLoggerHandler(IAopLoggerHandler aopLoggerHandler) {};
+    default void initAopAdapter(Object... objects) {};
 }

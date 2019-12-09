@@ -1,6 +1,7 @@
 package com.ninggc.template.springbootfastdemo.common.config.aop;
 
 import com.ninggc.template.springbootfastdemo.common.config.aop.adapter.IAopAdapter;
+import com.ninggc.template.springbootfastdemo.common.config.aop.adapter.impl.LoggerAopAdapter;
 import com.ninggc.template.springbootfastdemo.common.config.aop.logger.IAopLoggerHandler;
 import com.ninggc.template.springbootfastdemo.common.util.IUtilGson;
 import com.ninggc.template.springbootfastdemo.common.util.IUtilLogger;
@@ -11,10 +12,9 @@ import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
+import org.springframework.util.Assert;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * 控制切面的自定义操作，
@@ -33,27 +33,41 @@ public abstract class AopConfiguration implements IUtilGson, IUtilLogger, IAopLo
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent event) {
-        // 注册所有的adapter：在切面实现多项自定义功能
-        Map<String, Object> beansWithAnnotation = event.getApplicationContext().getBeansWithAnnotation(AopAdapter.class);
-        for (Object value : beansWithAnnotation.values()) {
-            if (value instanceof IAopAdapter) {
-                // 排除有ExcludeAopAdapter标记
-                ExcludeAopAdapter excludeAopAdapter = this.getClass().getAnnotation(ExcludeAopAdapter.class);
-                boolean exclude = false;
-                if (null != excludeAopAdapter) {
-                    for (Class<? extends IAopAdapter> excludeClass : excludeAopAdapter.excludeClasses()) {
-                        if (value.getClass().equals(excludeClass)) {
-                            exclude = true;
-                            break;
-                        }
+        // 对该实例的切面配上adapter
+        if (this.getClass().getAnnotation(AopAdapterConfig.class) != null) {
+            AopAdapterConfig aopAdapterConfig = this.getClass().getAnnotation(AopAdapterConfig.class);
+            Class<? extends IAopAdapter>[] acceptAdapters = aopAdapterConfig.acceptAdapters();
+            Class<? extends IAopAdapter>[] excludeAdapters = aopAdapterConfig.excludeAdapters();
+
+            if (acceptAdapters.length > 0) {
+                for (Class<? extends IAopAdapter> adapter : acceptAdapters) {
+                    adapters.add(event.getApplicationContext().getBean(adapter));
+                }
+            } else {
+                // 如果没有配置accept, 就走exclude规则
+                HashSet<Object> excludeAdapterSet = new HashSet<>();
+                Collections.addAll(excludeAdapterSet, excludeAdapters);
+
+                Map<String, Object> allAopAdapters = event.getApplicationContext().getBeansWithAnnotation(AopAdapter.class);
+                for (Object adapter : allAopAdapters.values()) {
+                    if (!excludeAdapterSet.remove(adapter.getClass())) {
+                        Assert.isTrue(adapter instanceof IAopAdapter, adapter.getClass().getName() + "必须实现" + IAopAdapter.class.getName());
+                        adapters.add((IAopAdapter) adapter);
                     }
                 }
-                if (!exclude) {
-                    IAopAdapter adapter = (IAopAdapter) value;
-                    adapter.setAopLoggerHandler(this);
-                    adapters.add(adapter);
-                }
             }
+        } else {
+            // 装配全部的adapter
+            Map<String, Object> allAopAdapters = event.getApplicationContext().getBeansWithAnnotation(AopAdapter.class);
+            for (Object adapter : allAopAdapters.values()) {
+                Assert.isTrue(adapter instanceof IAopAdapter, adapter.getClass().getName() + "必须实现" + IAopAdapter.class.getName());
+                adapters.add((IAopAdapter) adapter);
+            }
+        }
+
+        // 按照定义的需求初始化adapter
+        for (IAopAdapter adapter : adapters) {
+            adapter.initAopAdapter(this);
         }
     }
 

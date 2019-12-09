@@ -10,12 +10,11 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * 标记需要在切面执行的adapter
+ * 标记是AOP需要再切面执行的adapter
  */
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 @Component
-@Scope("prototype")
 public @interface AopAdapter {
     @AliasFor(annotation = Component.class)
     String value() default "";

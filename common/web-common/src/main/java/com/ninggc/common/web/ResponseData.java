@@ -17,6 +17,7 @@ public class ResponseData<T> {
 
     public ResponseData() {
         this.success = true;
+        this.message = "";
         this.code = 200;
     }
 
