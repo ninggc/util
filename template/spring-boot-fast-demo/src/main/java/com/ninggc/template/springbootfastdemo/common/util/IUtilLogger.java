@@ -6,7 +6,7 @@ import org.apache.logging.log4j.Logger;
 public interface IUtilLogger {
     Logger logger = LogManager.getLogger(LogManager.ROOT_LOGGER_NAME);
 
-    default void log(String content) {
+    default void info(String content) {
         logger.info(content);
     }
 

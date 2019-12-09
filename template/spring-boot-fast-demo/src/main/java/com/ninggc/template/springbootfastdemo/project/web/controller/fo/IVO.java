@@ -1,7 +1,35 @@
 package com.ninggc.template.springbootfastdemo.project.web.controller.fo;
 
+import com.ninggc.template.springbootfastdemo.common.util.IUtilGson;
+import com.ninggc.template.springbootfastdemo.common.util.IUtilLogger;
+
+import java.lang.reflect.Field;
+import java.util.HashMap;
 import java.util.Map;
 
-public interface IVO {
-    Map<String, Object> format();
+/**
+ * 标记这是一个需要format的VO
+ */
+public interface IVO extends IUtilGson, IUtilLogger {
+    default Map<String, Object> format() throws IllegalAccessException {
+        Map<String, Object> resultMap = new HashMap<>();
+        Field[] parents = this.getClass().getDeclaredFields();
+
+        try {
+            for (Field field : parents) {
+                field.setAccessible(true);
+                Object parent = field.get(this);
+
+                for (Field child : parent.getClass().getDeclaredFields()) {
+                    child.setAccessible(true);
+                    resultMap.put(child.getName(), child.get(parent));
+                }
+            }
+        } catch (IllegalAccessException e) {
+            error(e.getMessage());
+            throw e;
+        }
+
+        return resultMap;
+    }
 }

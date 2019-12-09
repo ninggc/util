@@ -37,7 +37,13 @@ public class ValidateAndFormatAopAdapter implements IAopAdapter {
     @Override
     public Object doAfterReturn(JoinPoint joinPoint, Object returnValue) {
         if (returnValue instanceof IVO) {
-            Map<String, Object> format = ((IVO) returnValue).format();
+            Map<String, Object> format = null;
+            try {
+                format = ((IVO) returnValue).format();
+            } catch (IllegalAccessException e) {
+                error(e.getMessage());
+                return ResponseData.buildSuccess(returnValue);
+            }
             return ResponseData.buildSuccess(format);
         }
         return null;

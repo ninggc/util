@@ -19,7 +19,7 @@ public class LoggerAopAdapter implements IAopAdapter, IUtilGson {
 
         String logContent = "——————" + "before " + aopLoggerHandler.getTag() + " execute: " + classAndMethodName + "——————";
         logContent += gson.toJson(parameterNames) + " --> " + gson.toJson(args);
-        log(logContent);
+        info(logContent);
     }
 
     @Override
@@ -28,7 +28,7 @@ public class LoggerAopAdapter implements IAopAdapter, IUtilGson {
 
         String logContent = "——————" + "after " + aopLoggerHandler.getTag() + " execute: " + classAndMethodName + "——————";
         logContent += " result --> " + gson.toJson(aopLoggerHandler.getResultToAopResult(returnValue));
-        log(logContent);
+        info(logContent);
         return null;
     }
 
@@ -37,7 +37,7 @@ public class LoggerAopAdapter implements IAopAdapter, IUtilGson {
         String classAndMethodName = joinPoint.getSignature().toShortString();
         String logContent = "——————" + "after " + aopLoggerHandler.getTag() + " throw: " + classAndMethodName + "——————";
         logContent += " throw --> " + gson.toJson(exception.getMessage());
-        log(logContent);
+        info(logContent);
         throw exception;
     }
 

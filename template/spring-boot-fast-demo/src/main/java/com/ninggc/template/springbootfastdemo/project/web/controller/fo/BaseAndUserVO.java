@@ -12,21 +12,9 @@ import java.util.Map;
 
 @Data
 @Accessors(chain = true)
-public class BaseAndUserVO implements IVO, IUtilGson {
+public class BaseAndUserVO implements IVO {
     @Transient
     private BaseEntity baseEntity;
     @Transient
     private UserEntity userEntity;
-
-    @Override
-    public Map<String, Object> format() {
-        String s1 = gson.toJson(baseEntity);
-        String s2 = gson.toJson(userEntity);
-
-        Map<String, Object> map = gson.fromJson(s1, new TypeToken<Map<String, Object>>(){}.getType());
-        Map<String, Object> map2 = gson.fromJson(s1, new TypeToken<Map<String, Object>>(){}.getType());
-        map.putAll(map2);
-
-        return map;
-    }
 }

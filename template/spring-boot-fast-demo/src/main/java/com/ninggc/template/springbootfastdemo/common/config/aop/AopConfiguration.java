@@ -1,7 +1,6 @@
 package com.ninggc.template.springbootfastdemo.common.config.aop;
 
 import com.ninggc.template.springbootfastdemo.common.config.aop.adapter.IAopAdapter;
-import com.ninggc.template.springbootfastdemo.common.config.aop.adapter.impl.LoggerAopAdapter;
 import com.ninggc.template.springbootfastdemo.common.config.aop.logger.IAopLoggerHandler;
 import com.ninggc.template.springbootfastdemo.common.util.IUtilGson;
 import com.ninggc.template.springbootfastdemo.common.util.IUtilLogger;
@@ -135,7 +134,7 @@ public abstract class AopConfiguration implements IUtilGson, IUtilLogger, IAopLo
             if (duration > getTimeThreshold()) {
                 warn(classAndMethodName + " execute time is too long: " + " --> " + duration + " ms");
             } else {
-                log(classAndMethodName + " execute time: " + " --> " + duration + " ms");
+                info(classAndMethodName + " execute time: " + " --> " + duration + " ms");
             }
             // after
             Object o = wrapAfterReturn(joinPoint, returnValue);
