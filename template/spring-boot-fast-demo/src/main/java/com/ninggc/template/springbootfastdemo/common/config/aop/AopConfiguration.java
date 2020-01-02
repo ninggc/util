@@ -38,9 +38,6 @@ public abstract class AopConfiguration implements IUtilGson, IUtilLogger, IAopLo
 
     protected Set<IAopAdapter> adapters = new HashSet<>();
 
-    @Value("${aop.switch.logger}")
-    private Boolean aopSwitchLogger;
-
     @Override
     public void onApplicationEvent(ContextRefreshedEvent event) {
         // 对该实例的切面配上adapter
@@ -77,14 +74,8 @@ public abstract class AopConfiguration implements IUtilGson, IUtilLogger, IAopLo
             }
 
             // 按照定义的需求初始化adapter
-            Iterator<IAopAdapter> iterator = adapters.iterator();
-            while (iterator.hasNext()) {
-                IAopAdapter adapter = iterator.next();
-                if (!aopSwitchLogger && adapter instanceof LoggerAopAdapter) {
-                    iterator.remove();
-                } else {
-                    adapter.initAopAdapter(this);
-                }
+            for (IAopAdapter adapter : adapters) {
+                adapter.initAopAdapter(this);
             }
         } catch (Exception e) {
             error("aop处理出现异常: " + e.getMessage());

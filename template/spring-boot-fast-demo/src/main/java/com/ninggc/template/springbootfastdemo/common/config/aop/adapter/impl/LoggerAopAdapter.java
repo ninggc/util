@@ -6,6 +6,7 @@ import com.ninggc.template.springbootfastdemo.common.config.aop.action.logger.Ta
 import com.ninggc.template.springbootfastdemo.common.config.aop.adapter.IAopAdapter;
 import com.ninggc.template.springbootfastdemo.common.config.aop.util.IUtilGson;
 import org.aspectj.lang.JoinPoint;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Scope;
 import org.springframework.util.Assert;
 
@@ -18,10 +19,16 @@ import java.util.Objects;
 public class LoggerAopAdapter implements IAopAdapter, IUtilGson {
     private IAopLoggerHandler aopLoggerHandler;
 
+    @Value("${aop.switch.logger:false}")
+    private Boolean aopSwitchLogger;
+
     @Override
     public void doBefore(JoinPoint joinPoint, String[] parameterNames, Object[] args) {
-        String classAndMethodName = joinPoint.getSignature().toShortString();
+        if (!aopSwitchLogger) {
+            return;
+        }
 
+        String classAndMethodName = joinPoint.getSignature().toShortString();
         StringBuilder logContent = initLogContent();
 
         logContent.append("before ")
@@ -38,7 +45,7 @@ public class LoggerAopAdapter implements IAopAdapter, IUtilGson {
             if (args[i] == null) {
                 argsShow = "null";
             } else if (!isLogIt(args[i])) {
-                argsShow = "不打印";
+                argsShow = "不打印" + "(" + args[i].getClass().getSimpleName() +  ")";
             } else {
                 try {
                     argsShow = gson.toJson(args[i]);
@@ -57,8 +64,11 @@ public class LoggerAopAdapter implements IAopAdapter, IUtilGson {
 
     @Override
     public Object doAfterReturn(JoinPoint joinPoint, Object returnValue) {
-        String classAndMethodName = joinPoint.getSignature().toShortString();
+        if (!aopSwitchLogger) {
+            return null;
+        }
 
+        String classAndMethodName = joinPoint.getSignature().toShortString();
         StringBuilder logContent = initLogContent();
 
         logContent.append("after  ")
@@ -71,7 +81,7 @@ public class LoggerAopAdapter implements IAopAdapter, IUtilGson {
         if (returnValue == null) {
             argsShow = "null";
         } else if (!isLogIt(returnValue)) {
-            argsShow = "不打印";
+            argsShow = "不打印" + "(" + returnValue.getClass().getSimpleName() +  ")";
         } else {
             try {
                 argsShow = gson.toJson(returnValue);
@@ -89,8 +99,11 @@ public class LoggerAopAdapter implements IAopAdapter, IUtilGson {
 
     @Override
     public void doAfterThrow(JoinPoint joinPoint, Exception exception) {
-        String classAndMethodName = joinPoint.getSignature().toShortString();
+        if (!aopSwitchLogger) {
+            return;
+        }
 
+        String classAndMethodName = joinPoint.getSignature().toShortString();
         StringBuilder logContent = initLogContent();
 
         logContent.append("after  ")
@@ -136,7 +149,7 @@ public class LoggerAopAdapter implements IAopAdapter, IUtilGson {
      * 对需要打印的PO返回true
      */
     protected boolean isLogIt(Object o) {
-        if (o.getClass().getName().contains("bigdata")) {
+        if (o.getClass().getName().contains("ninggc")) {
             return true;
         }
         if (o instanceof Collection) {

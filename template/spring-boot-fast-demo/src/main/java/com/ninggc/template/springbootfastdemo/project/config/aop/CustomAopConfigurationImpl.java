@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Aspect
+@AopAdapterConfig(acceptAdapters = LoggerAopAdapter.class)
 public class CustomAopConfigurationImpl extends AopConfiguration {
 
     @Override

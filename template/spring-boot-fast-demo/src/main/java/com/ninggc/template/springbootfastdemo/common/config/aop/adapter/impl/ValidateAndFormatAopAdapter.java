@@ -6,6 +6,7 @@ import com.ninggc.template.springbootfastdemo.common.config.aop.adapter.IAopAdap
 import com.ninggc.template.springbootfastdemo.common.security.Valid;
 import com.ninggc.template.springbootfastdemo.common.config.aop.action.validate.IVO;
 import org.aspectj.lang.JoinPoint;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.util.Assert;
 
 import javax.validation.constraints.NotNull;
@@ -17,8 +18,15 @@ import java.util.Map;
  */
 @AopAdapter
 public class ValidateAndFormatAopAdapter implements IAopAdapter {
+    @Value("${aop.switch.validate:false}")
+    private Boolean aopSwitch;
+
     @Override
     public void doBefore(JoinPoint joinPoint, String[] parameterNames, Object[] args) {
+        if (!aopSwitch) {
+            return;
+        }
+
         for (Object arg : args) {
             for (Field field : arg.getClass().getDeclaredFields()) {
                 if (field.getAnnotation(NotNull.class) != null) {
@@ -36,6 +44,10 @@ public class ValidateAndFormatAopAdapter implements IAopAdapter {
 
     @Override
     public Object doAfterReturn(JoinPoint joinPoint, Object returnValue) {
+        if (!aopSwitch) {
+            return null;
+        }
+
         if (returnValue instanceof IVO) {
             Map<String, Object> format = null;
             try {
@@ -51,6 +63,8 @@ public class ValidateAndFormatAopAdapter implements IAopAdapter {
 
     @Override
     public void doAfterThrow(JoinPoint joinPoint, Exception exception) {
-
+        if (!aopSwitch) {
+            return;
+        }
     }
 }

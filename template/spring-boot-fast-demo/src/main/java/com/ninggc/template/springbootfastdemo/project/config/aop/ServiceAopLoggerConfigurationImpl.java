@@ -16,7 +16,9 @@ import org.springframework.stereotype.Component;
 @AopAdapterConfig(acceptAdapters = LoggerAopAdapter.class)
 public class ServiceAopLoggerConfigurationImpl extends AopConfiguration {
 
-    @Pointcut("execution(* com.ninggc.template.springbootfastdemo.project.service.impl.*..*(..))")
+//    @Pointcut("execution(* com.ninggc.template.springbootfastdemo.project.service.impl.*..*(..))")
+    @Pointcut("(execution(* com.ninggc.template.springbootfastdemo.project.service..*.*(..))) " +
+            "and (@within(org.springframework.stereotype.Service))")
     protected void pointCutMethod() { }
 
     @Override
