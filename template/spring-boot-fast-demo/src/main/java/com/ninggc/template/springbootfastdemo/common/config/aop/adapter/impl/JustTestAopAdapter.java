@@ -23,7 +23,7 @@ public class JustTestAopAdapter implements IAopAdapter {
     }
 
     @Override
-    public void doAfterThrow(JoinPoint joinPoint, Exception exception) throws Exception {
+    public void doAfterThrow(JoinPoint joinPoint, Exception exception) {
         info(getMethodInfo().getMethodName());
     }
 }

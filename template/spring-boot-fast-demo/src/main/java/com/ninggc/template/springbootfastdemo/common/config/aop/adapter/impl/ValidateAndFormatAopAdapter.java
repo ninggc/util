@@ -4,7 +4,7 @@ import com.ninggc.common.web.ResponseData;
 import com.ninggc.template.springbootfastdemo.common.config.aop.AopAdapter;
 import com.ninggc.template.springbootfastdemo.common.config.aop.adapter.IAopAdapter;
 import com.ninggc.template.springbootfastdemo.common.security.Valid;
-import com.ninggc.template.springbootfastdemo.project.web.controller.fo.IVO;
+import com.ninggc.template.springbootfastdemo.common.config.aop.action.validate.IVO;
 import org.aspectj.lang.JoinPoint;
 import org.springframework.util.Assert;
 
@@ -50,7 +50,7 @@ public class ValidateAndFormatAopAdapter implements IAopAdapter {
     }
 
     @Override
-    public void doAfterThrow(JoinPoint joinPoint, Exception exception) throws Exception {
+    public void doAfterThrow(JoinPoint joinPoint, Exception exception) {
 
     }
 }

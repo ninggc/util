@@ -1,7 +1,7 @@
-package com.ninggc.template.springbootfastdemo.project.web.controller.fo;
+package com.ninggc.template.springbootfastdemo.common.config.aop.action.validate;
 
-import com.ninggc.template.springbootfastdemo.common.util.IUtilGson;
-import com.ninggc.template.springbootfastdemo.common.util.IUtilLogger;
+import com.ninggc.template.springbootfastdemo.common.config.aop.util.IUtilGson;
+import com.ninggc.template.springbootfastdemo.common.config.aop.util.IUtilLogger;
 
 import java.lang.reflect.Field;
 import java.util.HashMap;

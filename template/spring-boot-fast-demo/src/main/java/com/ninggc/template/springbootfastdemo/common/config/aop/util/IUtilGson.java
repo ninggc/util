@@ -1,4 +1,4 @@
-package com.ninggc.template.springbootfastdemo.common.util;
+package com.ninggc.template.springbootfastdemo.common.config.aop.util;
 
 import com.google.gson.Gson;
 

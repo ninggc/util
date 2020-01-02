@@ -1,0 +1,9 @@
+{
+  "properties": [
+    {
+      "name": "aop.switch.logger",
+      "type": "java.lang.Boolean",
+      "description": "Description for aop.switch.logger."
+    }
+  ]
+}

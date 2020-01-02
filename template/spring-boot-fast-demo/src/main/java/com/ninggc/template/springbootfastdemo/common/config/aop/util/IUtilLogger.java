@@ -1,4 +1,4 @@
-package com.ninggc.template.springbootfastdemo.common.util;
+package com.ninggc.template.springbootfastdemo.common.config.aop.util;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

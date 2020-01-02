@@ -1,4 +1,4 @@
-package com.ninggc.template.springbootfastdemo.common.config.aop.logger;
+package com.ninggc.template.springbootfastdemo.common.config.aop.action.logger;
 
 import com.ninggc.util.autogenerate.AutoGeneration;
 import lombok.Data;

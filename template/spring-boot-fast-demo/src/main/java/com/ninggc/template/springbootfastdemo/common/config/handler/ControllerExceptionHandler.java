@@ -1,8 +1,8 @@
 package com.ninggc.template.springbootfastdemo.common.config.handler;
 
 import com.ninggc.common.web.ResponseData;
-import com.ninggc.template.springbootfastdemo.common.util.IUtilGson;
-import com.ninggc.template.springbootfastdemo.common.util.IUtilLogger;
+import com.ninggc.template.springbootfastdemo.common.config.aop.util.IUtilGson;
+import com.ninggc.template.springbootfastdemo.common.config.aop.util.IUtilLogger;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
