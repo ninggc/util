@@ -1,6 +1,5 @@
 package com.ninggc.template.springbootfastdemo.common.config.aop.adapter;
 
-import com.ninggc.template.springbootfastdemo.common.config.aop.action.logger.IAopLoggerHandler;
 import com.ninggc.template.springbootfastdemo.common.config.aop.util.IUtilLogger;
 import org.aspectj.lang.JoinPoint;
 

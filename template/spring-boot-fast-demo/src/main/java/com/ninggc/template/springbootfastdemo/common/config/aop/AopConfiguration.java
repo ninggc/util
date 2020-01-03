@@ -101,6 +101,10 @@ public abstract class AopConfiguration implements IUtilGson, IUtilLogger, IAopLo
                 adapter.doBefore(joinPoint, parameterNames, args);
             }
         } catch (Exception e) {
+            if (e instanceof IllegalArgumentException) {
+                throw e;
+            }
+
             error("aop处理出现异常: " + e.getMessage());
             logger.error("aop处理出现异常: " + e.getMessage());
             e.printStackTrace();

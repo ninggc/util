@@ -28,7 +28,6 @@ public class TestController {
     }
 
     @ApiOperation("测试一个VO返回两个实体")
-    @MethodLog
     @GetMapping("")
     public Object test(StringFO stringFO) {
         return new BaseAndUserVO().setBaseEntity(new BaseEntity()).setUserEntity(new UserEntity());

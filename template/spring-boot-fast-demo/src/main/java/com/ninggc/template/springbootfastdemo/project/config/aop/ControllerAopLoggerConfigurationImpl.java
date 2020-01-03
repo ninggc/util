@@ -3,7 +3,7 @@ package com.ninggc.template.springbootfastdemo.project.config.aop;
 import com.ninggc.template.springbootfastdemo.common.config.aop.AopConfiguration;
 import com.ninggc.template.springbootfastdemo.common.config.aop.AopAdapterConfig;
 import com.ninggc.template.springbootfastdemo.common.config.aop.adapter.impl.LoggerAopAdapter;
-import com.ninggc.template.springbootfastdemo.common.config.aop.adapter.impl.ValidateAndFormatAopAdapter;
+import com.ninggc.template.springbootfastdemo.common.config.aop.adapter.impl.ValidateAopAdapter;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.stereotype.Component;
@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
  */
 @Component
 @Aspect
-@AopAdapterConfig(acceptAdapters = {LoggerAopAdapter.class, ValidateAndFormatAopAdapter.class})
+@AopAdapterConfig(acceptAdapters = {LoggerAopAdapter.class, ValidateAopAdapter.class})
 public class ControllerAopLoggerConfigurationImpl extends AopConfiguration {
 
 //    @Pointcut("execution(* com.ninggc.template.springbootfastdemo.project.web.controller.*..*(..))")

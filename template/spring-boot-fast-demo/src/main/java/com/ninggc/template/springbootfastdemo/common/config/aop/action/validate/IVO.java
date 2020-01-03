@@ -10,6 +10,7 @@ import java.util.Map;
 /**
  * 标记这是一个需要format的VO
  */
+@Deprecated
 public interface IVO extends IUtilGson, IUtilLogger {
     default Map<String, Object> format() throws IllegalAccessException {
         Map<String, Object> resultMap = new HashMap<>();
