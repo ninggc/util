@@ -1,4 +1,4 @@
-package com.ninggc.util.common.util;
+package com.ninggc.util.common.aop.util;
 
 import com.google.gson.Gson;
 

@@ -1,7 +1,7 @@
-package com.ninggc.template.springbootfastdemo.common.config.aop.action.validate.impl;
+package com.ninggc.util.common.aop.action.validate.impl;
 
-import com.ninggc.template.springbootfastdemo.common.config.aop.action.validate.ConstraintValidator;
-import com.ninggc.template.springbootfastdemo.common.config.aop.action.validate.Validator;
+import com.ninggc.util.common.aop.action.validate.ConstraintValidator;
+import com.ninggc.util.common.aop.action.validate.Validator;
 import org.springframework.util.Assert;
 
 import javax.validation.constraints.NotEmpty;
@@ -9,6 +9,9 @@ import java.lang.annotation.Annotation;
 import java.util.Collection;
 import java.util.Map;
 
+/**
+ * @author ninggc
+ */
 @Validator(NotEmpty.class)
 public class NotEmptyValidator implements ConstraintValidator {
     private static final String DEFAULT_MESSAGE = "必须至少含有一个元素";

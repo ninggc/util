@@ -1,12 +1,15 @@
-package com.ninggc.template.springbootfastdemo.common.config.aop.action.validate.impl;
+package com.ninggc.util.common.aop.action.validate.impl;
 
-import com.ninggc.template.springbootfastdemo.common.config.aop.action.validate.ConstraintValidator;
-import com.ninggc.template.springbootfastdemo.common.config.aop.action.validate.Validator;
+import com.ninggc.util.common.aop.action.validate.ConstraintValidator;
+import com.ninggc.util.common.aop.action.validate.Validator;
 import org.springframework.util.Assert;
 
 import javax.validation.constraints.NotNull;
 import java.lang.annotation.Annotation;
 
+/**
+ * @author ninggc
+ */
 @Validator(NotNull.class)
 public class NotNullValidator implements ConstraintValidator {
     private static final String DEFAULT_MESSAGE = "不能为null";
