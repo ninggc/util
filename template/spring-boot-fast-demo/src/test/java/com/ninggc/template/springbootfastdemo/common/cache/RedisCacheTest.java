@@ -7,7 +7,7 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.text.SimpleDateFormat;
+import java.text.DateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -18,7 +18,7 @@ public class RedisCacheTest extends AbstractBaseTest {
     @Autowired
     BaseService baseService;
     @Autowired
-    SimpleDateFormat sdf;
+    ThreadLocal<DateFormat> sdf;
 
     private Date date;
     private List<BaseEntity> allEntity;
@@ -37,10 +37,10 @@ public class RedisCacheTest extends AbstractBaseTest {
 
     @Test
     public void cacheString() {
-        iCache.setString("test", sdf.format(date));
+        iCache.setString("test", sdf.get().format(date));
 
         String string = iCache.getString("test");
-        Assert.assertEquals(sdf.format(date), string);
+        Assert.assertEquals(sdf.get().format(date), string);
 
         putResult(string);
     }

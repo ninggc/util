@@ -3,7 +3,9 @@ package com.ninggc.template.springbootfastdemo.common.config.aop.action.logger;
 public enum TagEnum {
     CONTROLLER("controller"),
     SERVICE("service   "),
-    DAO("dao       ");
+    DAO("dao       "),
+    CUSTOM("custom    "),
+    METHOD("method    ");
 
     private String value;
 

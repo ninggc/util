@@ -1,7 +1,8 @@
 package com.ninggc.template.springbootfastdemo.project.config.aop;
 
-import com.ninggc.template.springbootfastdemo.common.config.aop.AopConfiguration;
 import com.ninggc.template.springbootfastdemo.common.config.aop.AopAdapterConfig;
+import com.ninggc.template.springbootfastdemo.common.config.aop.AopConfiguration;
+import com.ninggc.template.springbootfastdemo.common.config.aop.action.logger.TagEnum;
 import com.ninggc.template.springbootfastdemo.common.config.aop.adapter.impl.LoggerAopAdapter;
 import com.ninggc.template.springbootfastdemo.common.config.aop.adapter.impl.ValidateAopAdapter;
 import org.aspectj.lang.annotation.Aspect;
@@ -25,6 +26,6 @@ public class ControllerAopLoggerConfigurationImpl extends AopConfiguration {
 
     @Override
     public String getTag() {
-        return "controller";
+        return TagEnum.CONTROLLER.getValue();
     }
 }

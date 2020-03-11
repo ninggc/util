@@ -1,8 +1,8 @@
 package com.ninggc.template.springbootfastdemo.project.config.aop;
 
-import com.ninggc.template.springbootfastdemo.common.config.aop.AopConfiguration;
 import com.ninggc.template.springbootfastdemo.common.config.aop.AopAdapterConfig;
-import com.ninggc.template.springbootfastdemo.common.config.aop.adapter.impl.JustTestAopAdapter;
+import com.ninggc.template.springbootfastdemo.common.config.aop.AopConfiguration;
+import com.ninggc.template.springbootfastdemo.common.config.aop.action.logger.TagEnum;
 import com.ninggc.template.springbootfastdemo.common.config.aop.adapter.impl.LoggerAopAdapter;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
@@ -23,6 +23,6 @@ public class ServiceAopLoggerConfigurationImpl extends AopConfiguration {
 
     @Override
     public String getTag() {
-        return "service";
+        return TagEnum.SERVICE.getValue();
     }
 }

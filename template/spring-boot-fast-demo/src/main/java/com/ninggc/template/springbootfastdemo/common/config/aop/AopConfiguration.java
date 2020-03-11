@@ -38,7 +38,7 @@ public abstract class AopConfiguration implements IUtilGson, IUtilLogger, IAopLo
 
     protected Set<IAopAdapter> adapters = new HashSet<>();
 
-    @Value("${aop.switch.logger}")
+    @Value("${aop.switch.logger:false}")
     private Boolean aopSwitchLogger;
 
     @Override
