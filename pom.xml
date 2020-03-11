@@ -19,6 +19,7 @@
         <module>auto-generate-instance</module>
 
         <module>db-base/hibernate-base</module>
+        <module>common/web-common</module>
 
         <module>spring-boot-starter/ninggc-aop</module>
         <module>spring-boot-starter/ninggc-aop-spring-boot-starter</module>

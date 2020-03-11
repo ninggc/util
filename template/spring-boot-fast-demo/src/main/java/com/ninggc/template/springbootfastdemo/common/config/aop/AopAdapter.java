@@ -1,6 +1,5 @@
 package com.ninggc.template.springbootfastdemo.common.config.aop;
 
-import org.springframework.context.annotation.Scope;
 import org.springframework.core.annotation.AliasFor;
 import org.springframework.stereotype.Component;
 

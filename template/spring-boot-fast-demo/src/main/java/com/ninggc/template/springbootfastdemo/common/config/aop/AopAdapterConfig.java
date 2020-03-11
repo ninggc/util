@@ -1,8 +1,7 @@
 package com.ninggc.template.springbootfastdemo.common.config.aop;
 
+
 import com.ninggc.template.springbootfastdemo.common.config.aop.adapter.IAopAdapter;
-import com.ninggc.template.springbootfastdemo.common.config.aop.adapter.impl.LoggerAopAdapter;
-import com.ninggc.template.springbootfastdemo.common.config.aop.adapter.impl.JustTestAopAdapter;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -25,5 +24,5 @@ public @interface AopAdapterConfig {
      * 标注切面不使用的adapter
      * exclude只有在accept未设置的时候才生效
      */
-    Class<? extends IAopAdapter>[] excludeAdapters() default {JustTestAopAdapter.class};
+    Class<? extends IAopAdapter>[] excludeAdapters() default {};
 }

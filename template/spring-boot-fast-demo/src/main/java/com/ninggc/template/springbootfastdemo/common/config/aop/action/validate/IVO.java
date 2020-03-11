@@ -1,5 +1,6 @@
 package com.ninggc.template.springbootfastdemo.common.config.aop.action.validate;
 
+
 import com.ninggc.template.springbootfastdemo.common.config.aop.util.IUtilGson;
 import com.ninggc.template.springbootfastdemo.common.config.aop.util.IUtilLogger;
 
@@ -10,7 +11,6 @@ import java.util.Map;
 /**
  * 标记这是一个需要format的VO
  */
-@Deprecated
 public interface IVO extends IUtilGson, IUtilLogger {
     default Map<String, Object> format() throws IllegalAccessException {
         Map<String, Object> resultMap = new HashMap<>();
@@ -27,7 +27,7 @@ public interface IVO extends IUtilGson, IUtilLogger {
                 }
             }
         } catch (IllegalAccessException e) {
-            error(e.getMessage());
+            error(e.getMessage(), e);
             throw e;
         }
 

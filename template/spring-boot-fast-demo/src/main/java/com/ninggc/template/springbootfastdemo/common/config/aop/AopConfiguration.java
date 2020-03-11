@@ -1,7 +1,7 @@
 package com.ninggc.template.springbootfastdemo.common.config.aop;
 
-import com.ninggc.template.springbootfastdemo.common.config.aop.adapter.IAopAdapter;
 import com.ninggc.template.springbootfastdemo.common.config.aop.action.logger.IAopLoggerHandler;
+import com.ninggc.template.springbootfastdemo.common.config.aop.adapter.IAopAdapter;
 import com.ninggc.template.springbootfastdemo.common.config.aop.adapter.impl.LoggerAopAdapter;
 import com.ninggc.template.springbootfastdemo.common.config.aop.util.IUtilGson;
 import com.ninggc.template.springbootfastdemo.common.config.aop.util.IUtilLogger;
@@ -37,6 +37,9 @@ public abstract class AopConfiguration implements IUtilGson, IUtilLogger, IAopLo
     Logger logger = LogManager.getLogger();
 
     protected Set<IAopAdapter> adapters = new HashSet<>();
+
+    @Value("${aop.switch.logger}")
+    private Boolean aopSwitchLogger;
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent event) {
@@ -74,12 +77,18 @@ public abstract class AopConfiguration implements IUtilGson, IUtilLogger, IAopLo
             }
 
             // 按照定义的需求初始化adapter
-            for (IAopAdapter adapter : adapters) {
-                adapter.initAopAdapter(this);
+            Iterator<IAopAdapter> iterator = adapters.iterator();
+            while (iterator.hasNext()) {
+                IAopAdapter adapter = iterator.next();
+                if (!aopSwitchLogger && adapter instanceof LoggerAopAdapter) {
+                    iterator.remove();
+                } else {
+                    adapter.initAopAdapter(this);
+                }
             }
         } catch (Exception e) {
-            error("aop处理出现异常: " + e.getMessage());
-            logger.error("aop处理出现异常: " + e.getMessage());
+            error("aop处理出现异常: " + e.getMessage(), e);
+            logger.error("aop处理出现异常: " + e.getMessage(), e);
             e.printStackTrace();
         }
     }
@@ -95,18 +104,15 @@ public abstract class AopConfiguration implements IUtilGson, IUtilLogger, IAopLo
      */
     protected void wrapBefore(JoinPoint joinPoint) {
         try {
+            IUtilLogger.currentThreadServiceDepthAdd(1);
             String[] parameterNames = ((MethodSignature) joinPoint.getSignature()).getParameterNames();
             Object[] args = joinPoint.getArgs();
             for (IAopAdapter adapter : adapters) {
                 adapter.doBefore(joinPoint, parameterNames, args);
             }
         } catch (Exception e) {
-            if (e instanceof IllegalArgumentException) {
-                throw e;
-            }
-
-            error("aop处理出现异常: " + e.getMessage());
-            logger.error("aop处理出现异常: " + e.getMessage());
+            error("aop处理出现异常: " + e.getMessage(), e);
+            logger.error("aop处理出现异常: " + e.getMessage(), e);
             e.printStackTrace();
         }
     }
@@ -123,10 +129,11 @@ public abstract class AopConfiguration implements IUtilGson, IUtilLogger, IAopLo
                     resultValue = o;
                 }
             }
+            IUtilLogger.currentThreadServiceDepthCut(1);
             return resultValue;
         } catch (Exception e) {
-            error("aop处理出现异常: " + e.getMessage());
-            logger.error("aop处理出现异常: " + e.getMessage());
+            error("aop处理出现异常: " + e.getMessage(), e);
+            logger.error("aop处理出现异常: " + e.getMessage(), e);
             e.printStackTrace();
             return null;
         }
@@ -135,14 +142,15 @@ public abstract class AopConfiguration implements IUtilGson, IUtilLogger, IAopLo
     /**
      * 包裹afterThrow函数
      */
-    protected void wrapAfterThrow(JoinPoint joinPoint, Exception exception) throws Exception {
+    protected void wrapAfterThrow(JoinPoint joinPoint, Exception exception) {
         try {
             for (IAopAdapter adapter : adapters) {
                 adapter.doAfterThrow(joinPoint, exception);
             }
+            IUtilLogger.currentThreadServiceDepthCut(1);
         } catch (Exception e) {
-            error("aop处理出现异常: " + e.getMessage());
-            logger.error("aop处理出现异常: " + e.getMessage());
+            error("aop处理出现异常: " + e.getMessage(), e);
+            logger.error("aop处理出现异常: " + e.getMessage(), e);
             e.printStackTrace();
         }
     }
