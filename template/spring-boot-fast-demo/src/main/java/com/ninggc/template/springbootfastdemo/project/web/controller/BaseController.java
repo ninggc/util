@@ -1,6 +1,5 @@
 package com.ninggc.template.springbootfastdemo.project.web.controller;
 
-import com.ninggc.template.springbootfastdemo.common.config.aop.AopAdapter;
 import com.ninggc.template.springbootfastdemo.project.entity.BaseEntity;
 import com.ninggc.template.springbootfastdemo.project.service.BaseService;
 import io.swagger.annotations.Api;

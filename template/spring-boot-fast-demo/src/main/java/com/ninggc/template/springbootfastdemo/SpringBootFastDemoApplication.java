@@ -1,13 +1,9 @@
 package com.ninggc.template.springbootfastdemo;
 
-import com.ninggc.template.springbootfastdemo.common.config.aop.AopAdapter;
-import com.ninggc.template.springbootfastdemo.common.config.aop.AopConfiguration;
-import com.ninggc.template.springbootfastdemo.project.config.aop.ControllerAopLoggerConfigurationImpl;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.event.ApplicationStartedEvent;
 import org.springframework.context.ApplicationListener;
-import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.PropertySource;
 import springfox.documentation.builders.PathSelectors;
@@ -16,8 +12,9 @@ import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
-import java.util.Map;
-
+/**
+ * @author ninggc
+ */
 @SpringBootApplication
 @PropertySource("classpath:morphia.properties")
 @EnableSwagger2

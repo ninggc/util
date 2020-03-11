@@ -1,27 +1,33 @@
 package com.ninggc.template.springbootfastdemo.common.config.handler;
 
 import com.ninggc.common.web.ResponseData;
-import com.ninggc.template.springbootfastdemo.common.config.aop.util.IUtilGson;
-import com.ninggc.template.springbootfastdemo.common.config.aop.util.IUtilLogger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-// 标记是对controller的advice
+/**
+ * @author ninggc
+ * 标记是对controller的advice
+ */
 @RestControllerAdvice
-public class ControllerExceptionHandler implements IUtilGson, IUtilLogger {
-    // 标记匹配的异常
+public class ControllerExceptionHandler {
+    Logger logger = LogManager.getLogger(ControllerExceptionHandler.class);
+
+    /**
+     * 标记匹配的异常
+     */
     @ExceptionHandler(value = NullPointerException.class)
     public ResponseData<Object> handException(NullPointerException e) {
         // 在这里可以对相应的异常进行封装
-        error(e.getMessage());
-        StackTraceElement[] stackTrace = e.getStackTrace();
-        return ResponseData.buildFailed(gson.toJson(new StackTraceElement[]{stackTrace[0], stackTrace[1], stackTrace[2]}));
+        logger.error(e.getMessage(), e);
+        return ResponseData.buildFailed(e.getMessage());
     }
 
     @ExceptionHandler(value = Exception.class)
     public ResponseData<Object> handException(Exception e) {
         // 在这里可以对相应的异常进行封装
-        error(e.getMessage());
+        logger.error(e.getMessage(), e);
         return ResponseData.buildFailed(e.getMessage());
     }
 }

@@ -1,6 +1,6 @@
 package com.ninggc.template.springbootfastdemo.common.interceptor;
 
-import com.ninggc.template.springbootfastdemo.common.config.aop.util.IUtilLogger;
+import com.ninggc.util.common.aop.util.IUtilLogger;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Component;

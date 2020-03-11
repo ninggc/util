@@ -1,12 +1,14 @@
 package com.ninggc.template.springbootfastdemo.project.web.controller.fo;
 
-import com.ninggc.template.springbootfastdemo.common.config.aop.action.validate.Validate;
 import com.ninggc.template.springbootfastdemo.common.security.Valid;
+import com.ninggc.util.common.aop.action.validate.Validate;
 import lombok.Data;
-import org.springframework.util.Assert;
 
 import javax.validation.constraints.NotNull;
 
+/**
+ * @author ninggc
+ */
 @Data
 @Validate
 public class StringFO implements Valid {

@@ -1,6 +1,5 @@
 package com.ninggc.template.springbootfastdemo.project.web.controller;
 
-import com.ninggc.template.springbootfastdemo.common.config.aop.MethodLog;
 import com.ninggc.template.springbootfastdemo.project.entity.BaseEntity;
 import com.ninggc.template.springbootfastdemo.project.entity.UserEntity;
 import com.ninggc.template.springbootfastdemo.project.web.controller.fo.BaseAndUserVO;

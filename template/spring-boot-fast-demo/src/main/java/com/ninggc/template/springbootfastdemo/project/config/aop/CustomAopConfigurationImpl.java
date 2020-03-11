@@ -1,9 +1,9 @@
 package com.ninggc.template.springbootfastdemo.project.config.aop;
 
-import com.ninggc.template.springbootfastdemo.common.config.aop.AopAdapterConfig;
-import com.ninggc.template.springbootfastdemo.common.config.aop.AopConfiguration;
-import com.ninggc.template.springbootfastdemo.common.config.aop.action.logger.TagEnum;
-import com.ninggc.template.springbootfastdemo.common.config.aop.adapter.impl.LoggerAopAdapter;
+import com.ninggc.util.common.aop.AopAdapterConfig;
+import com.ninggc.util.common.aop.AopConfiguration;
+import com.ninggc.util.common.aop.action.logger.TagEnum;
+import com.ninggc.util.common.aop.adapter.impl.LoggerAopAdapter;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.stereotype.Component;
@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
 public class CustomAopConfigurationImpl extends AopConfiguration {
 
     @Override
-    @Pointcut("@annotation(com.ninggc.template.springbootfastdemo.common.config.aop.MethodLog)")
+    @Pointcut("@annotation(com.ninggc.util.common.aop.MethodLog)")
     protected void pointCutMethod() { }
 
     @Override
