@@ -26,8 +26,6 @@
         <module>spring-boot-starter/ninggc-morphia</module>
         <module>spring-boot-starter/ninggc-morphia-spring-boot-starter</module>
 
-        <module>common/web-common</module>
-
         <module>template/spring-boot-fast-demo</module>
     </modules>
 
