@@ -2,12 +2,14 @@ package com.ninggc.template.springbootfastdemo.common.cache;
 
 import com.google.gson.Gson;
 import com.ninggc.template.springbootfastdemo.project.entity.BaseEntity;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.stereotype.Service;
 import redis.clients.jedis.Jedis;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
+@ConditionalOnBean(Jedis.class)
 @Service
 public class RedisCache implements ICache<BaseEntity> {
     private final Jedis jedis;

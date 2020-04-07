@@ -4,19 +4,16 @@ import com.mongodb.MongoClient;
 import com.mongodb.MongoClientURI;
 import dev.morphia.Datastore;
 import dev.morphia.Morphia;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
-import org.springframework.core.env.ConfigurableEnvironment;
 
 @Configuration
 @EnableConfigurationProperties({NinggcMorphiaProperties.class})
 @PropertySource("classpath:morphia.properties")
+@ConditionalOnProperty(value = "", prefix = "mongodb")
 public class NinggcMorphiaConfiguration {
     private final NinggcMorphiaProperties properties;
 

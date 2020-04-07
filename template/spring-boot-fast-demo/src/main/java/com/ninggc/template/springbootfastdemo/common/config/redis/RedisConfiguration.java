@@ -1,5 +1,6 @@
 package com.ninggc.template.springbootfastdemo.common.config.redis;
 
+import org.springframework.boot.autoconfigure.condition.ConditionalOnResource;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,6 +14,7 @@ import redis.clients.jedis.Jedis;
 public class RedisConfiguration {
 
     @Bean
+    @ConditionalOnResource(resources = "classpath://application.properties")
     public RedisConnectionFactory redisConnectionFactory(RedisProperties properties) {
         RedisStandaloneConfiguration configuration = new RedisStandaloneConfiguration();
         configuration.setHostName(properties.getHost());
@@ -22,6 +24,7 @@ public class RedisConfiguration {
     }
 
     @Bean
+    @ConditionalOnResource(resources = "classpath://application.properties")
     public Jedis jedis(RedisProperties properties) {
         return new Jedis(properties.getHost());
     }
