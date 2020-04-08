@@ -1,11 +1,13 @@
 package com.ninggc.template.springbootfastdemo.test;
 
 import com.ninggc.template.springbootfastdemo.SpringBootFastDemoApplication;
+import com.ninggc.template.springbootfastdemo.project.entity.UserEntity;
 import org.springframework.beans.factory.BeanNameAware;
+import org.springframework.beans.factory.FactoryBean;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-public class Main implements InitializingBean, BeanNameAware {
+public class Main implements InitializingBean, BeanNameAware, FactoryBean<UserEntity> {
 
     public Main() {
         System.out.println("main");
@@ -13,6 +15,8 @@ public class Main implements InitializingBean, BeanNameAware {
 
     public static void main(String[] args) {
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(SpringBootFastDemoApplication.class, Main.class);
+
+        Object simpleDateFormat = context.getBean("simpleDateFormat");
 
         System.out.println("end");
     }
@@ -25,5 +29,20 @@ public class Main implements InitializingBean, BeanNameAware {
     @Override
     public void afterPropertiesSet() throws Exception {
         System.out.println("afterPropertiesSet");
+    }
+
+    @Override
+    public UserEntity getObject() throws Exception {
+        return null;
+    }
+
+    @Override
+    public Class<?> getObjectType() {
+        return null;
+    }
+
+    @Override
+    public boolean isSingleton() {
+        return false;
     }
 }

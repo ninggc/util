@@ -21,7 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MorphiaBaseImpl<T extends IMorphiaPO> implements MorphiaBase<T> {
-    @Autowired
+    @Autowired(required = false)
     private Datastore datastore;
 
     /**
