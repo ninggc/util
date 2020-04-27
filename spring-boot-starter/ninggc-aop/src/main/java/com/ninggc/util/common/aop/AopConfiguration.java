@@ -34,9 +34,11 @@ import java.util.*;
  */
 @Component
 public abstract class AopConfiguration implements IUtilGson, IUtilLogger, IAopLoggerHandler, ApplicationListener<ContextRefreshedEvent> {
-    protected Set<IAopAdapter> adapters = new HashSet<>();
     // 这个logger打印非aop的日志
     Logger logger = LogManager.getLogger();
+
+    protected Set<IAopAdapter> adapters = new HashSet<>();
+
     @Value("${aop.switch.logger:false}")
     private Boolean aopSwitchLogger;
 

@@ -16,9 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.validation.constraints.NotNull;
 import java.lang.annotation.Annotation;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.Objects;
+import java.util.*;
 
 /**
  * @author ninggc
@@ -201,14 +199,38 @@ public class LoggerAopAdapter implements IAopAdapter, IUtilGson {
      * o 为空的逻辑在之前处理
      */
     protected boolean isLogIt(@NotNull Object o) {
+        if (o.getClass().isInterface() || o.getClass().getName().contains("Impl")) {
+            return false;
+        }
         if (o.getClass().getName().contains("bigdata")) {
             return true;
+        }
+        // if (o instanceof Page) {
+        //     return true;
+        // }
+        if (o instanceof List) {
+            List list = (List) o;
+            if (list.size() == 0) {
+                return true;
+            } else {
+                return isLogIt(list.get(0));
+            }
+        }
+        if (o instanceof Map) {
+            Map map = (Map) o;
+            if (map.size() == 0) {
+                return true;
+            } else {
+                Iterator set = map.keySet().iterator();
+                Iterator values = map.values().iterator();
+                return isLogIt(set) && isLogIt(values);
+            }
         }
         if (o instanceof Iterable) {
             Iterator iterator = ((Iterable) o).iterator();
             if (iterator.hasNext()) {
                 // 递归处理，list类型可以打印，map类型暂时不打印
-                isLogIt(iterator.next());
+                return isLogIt(iterator.next());
             } else {
                 return true;
             }
