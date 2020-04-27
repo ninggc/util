@@ -2,13 +2,14 @@ package com.ninggc.template.springbootfastdemo.project.service.impl;
 
 import com.ninggc.template.springbootfastdemo.project.dao.DaoFactory;
 import com.ninggc.template.springbootfastdemo.project.entity.BaseEntity;
-import com.ninggc.template.springbootfastdemo.project.entity.UserEntity;
 import com.ninggc.template.springbootfastdemo.project.service.BaseService;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@EnableAspectJAutoProxy
 public class BaseServiceImpl implements BaseService {
 
     private final DaoFactory.BaseDAO baseDAO;
