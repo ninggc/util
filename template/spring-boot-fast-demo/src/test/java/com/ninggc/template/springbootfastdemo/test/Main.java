@@ -18,6 +18,8 @@ public class Main implements InitializingBean, BeanNameAware, FactoryBean<UserEn
 
         Object simpleDateFormat = context.getBean("simpleDateFormat");
 
+        ThreadLocal bean = context.getBean(ThreadLocal.class);
+
         System.out.println("end");
     }
 

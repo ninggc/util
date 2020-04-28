@@ -1,5 +1,6 @@
 package com.ninggc.template.springbootfastdemo;
 
+import org.springframework.aop.framework.AopContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -31,6 +32,7 @@ public class SpringBootFastDemoApplication implements ApplicationListener<Applic
 
     @Override
     public void onApplicationEvent(ApplicationStartedEvent event) {
+//        AopContext.currentProxy();
     }
 
     @Bean

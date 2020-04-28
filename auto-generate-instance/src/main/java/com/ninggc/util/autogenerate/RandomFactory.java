@@ -2,6 +2,7 @@ package com.ninggc.util.autogenerate;
 
 import com.google.common.base.Function;
 import com.google.common.base.Joiner;
+import com.google.common.base.Optional;
 import com.google.common.base.Splitter;
 import com.google.common.collect.HashMultiset;
 import com.google.common.collect.Lists;
@@ -9,6 +10,7 @@ import com.google.common.collect.Multiset;
 
 import javax.annotation.Nullable;
 import java.util.List;
+import java.util.Objects;
 import java.util.Random;
 
 /**
@@ -64,6 +66,9 @@ public class RandomFactory {
                 return Integer.valueOf(input);
             }
         });
+//        Optional
+//        Objects;
+//        com.google.common.base.Objects;
 
         System.out.println("end");
     }
