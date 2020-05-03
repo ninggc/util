@@ -1,7 +1,9 @@
 package com.ninggc.template.springbootfastdemo;
 
+import com.ninggc.template.springbootfastdemo.project.dao.SMSRecordMapper;
 import com.ninggc.template.springbootfastdemo.project.dao.UserMapper;
-import com.ninggc.template.springbootfastdemo.project.domain.User;
+import com.ninggc.template.springbootfastdemo.project.domain.SMSRecord;
+import com.ninggc.template.springbootfastdemo.project.domain.SMSRecordExample;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
@@ -33,6 +35,8 @@ public class SpringBootFastDemoApplication implements ApplicationListener<Applic
 
     @Autowired
     UserMapper userMapper;
+    @Autowired
+    SMSRecordMapper smsRecordMapper;
 
     public static void main(String[] args) {
         SpringApplication.run(SpringBootFastDemoApplication.class, args);
@@ -53,7 +57,11 @@ public class SpringBootFastDemoApplication implements ApplicationListener<Applic
     }
 
     @RequestMapping("test")
-    public User test() {
-        return userMapper.selectByPrimaryKey(1L);
+    public Object test() {
+//        SMSRecordExample example = new SMSRecordExample();
+//        example.createCriteria().andIdEqualTo(1);
+//        return smsRecordMapper.selectByExample(example);
+        return smsRecordMapper.selectByPrimaryKey(1);
+//        return userMapper.selectByPrimaryKey(1L);
     }
 }
