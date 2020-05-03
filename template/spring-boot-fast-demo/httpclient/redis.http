@@ -1,0 +1,2 @@
+###
+POST {{url}}/redis/set

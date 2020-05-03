@@ -12,6 +12,7 @@ import org.springframework.boot.context.event.ApplicationStartedEvent;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.support.AbstractApplicationContext;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import springfox.documentation.builders.PathSelectors;
@@ -27,6 +28,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 //@PropertySource("classpath:morphia.properties")
 @EnableSwagger2
 @MapperScan("com.ninggc.template.springbootfastdemo.project.dao")
+@EnableTransactionManagement
 @RestController
 public class SpringBootFastDemoApplication implements ApplicationListener<ApplicationStartedEvent> {
 
@@ -44,6 +46,7 @@ public class SpringBootFastDemoApplication implements ApplicationListener<Applic
 
     @Override
     public void onApplicationEvent(ApplicationStartedEvent event) {
+        System.out.println("onApplicationEvent");
 //        AopContext.currentProxy();
     }
 

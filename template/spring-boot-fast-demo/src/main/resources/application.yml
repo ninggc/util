@@ -4,7 +4,9 @@ spring:
     password: 906978985
     url: jdbc:mysql://ninggc.cn:7066/sso?useUnicode=true&characterEncoding=UTF-8&useSSL=false
     driver-class-name: com.mysql.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
 
 mybatis:
   mapper-locations: classpath:mapper/*Mapper.xml
 #  type-aliases-package: com.example.entity
+
