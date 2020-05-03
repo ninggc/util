@@ -13,7 +13,7 @@ import org.springframework.context.annotation.PropertySource;
 @Configuration
 @EnableConfigurationProperties({NinggcMorphiaProperties.class})
 @PropertySource("classpath:morphia.properties")
-@ConditionalOnProperty(value = "", prefix = "mongodb")
+//@ConditionalOnProperty(name = "", prefix = "mongodb")
 public class NinggcMorphiaConfiguration {
     private final NinggcMorphiaProperties properties;
 
