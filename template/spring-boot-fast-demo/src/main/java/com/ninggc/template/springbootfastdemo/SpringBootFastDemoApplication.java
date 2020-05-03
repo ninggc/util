@@ -1,14 +1,17 @@
 package com.ninggc.template.springbootfastdemo;
 
-import org.springframework.aop.framework.AopContext;
+import com.ninggc.template.springbootfastdemo.project.dao.UserMapper;
+import com.ninggc.template.springbootfastdemo.project.domain.User;
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.event.ApplicationStartedEvent;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.AbstractApplicationContext;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.spi.DocumentationType;
@@ -19,12 +22,17 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
  * @author ninggc
  */
 @SpringBootApplication
-@PropertySource("classpath:morphia.properties")
+//@PropertySource("classpath:morphia.properties")
 @EnableSwagger2
+@MapperScan("com.ninggc.template.springbootfastdemo.project.dao")
+@RestController
 public class SpringBootFastDemoApplication implements ApplicationListener<ApplicationStartedEvent> {
 
     @Autowired
     AbstractApplicationContext context;
+
+    @Autowired
+    UserMapper userMapper;
 
     public static void main(String[] args) {
         SpringApplication.run(SpringBootFastDemoApplication.class, args);
@@ -42,5 +50,10 @@ public class SpringBootFastDemoApplication implements ApplicationListener<Applic
                 .apis(RequestHandlerSelectors.any())
                 .paths(PathSelectors.any())
                 .build();
+    }
+
+    @RequestMapping("test")
+    public User test() {
+        return userMapper.selectByPrimaryKey(1L);
     }
 }
