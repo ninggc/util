@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.event.ApplicationStartedEvent;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.support.AbstractApplicationContext;
@@ -30,6 +31,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @MapperScan("com.ninggc.template.springbootfastdemo.project.dao")
 @EnableTransactionManagement
 @RestController
+@EnableDiscoveryClient
 public class SpringBootFastDemoApplication implements ApplicationListener<ApplicationStartedEvent> {
 
     @Autowired

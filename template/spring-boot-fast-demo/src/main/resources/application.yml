@@ -6,7 +6,7 @@ spring:
     driver-class-name: com.mysql.jdbc.Driver
     type: com.alibaba.druid.pool.DruidDataSource
 
+
 mybatis:
   mapper-locations: classpath:mapper/*Mapper.xml
 #  type-aliases-package: com.example.entity
-
