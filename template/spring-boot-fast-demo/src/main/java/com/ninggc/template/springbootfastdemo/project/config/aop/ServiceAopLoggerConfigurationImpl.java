@@ -22,7 +22,7 @@ public class ServiceAopLoggerConfigurationImpl extends AopConfiguration {
     protected void pointCutMethod() { }
 
     @Override
-    public String getTag() {
-        return TagEnum.SERVICE.getValue();
+    public TagEnum getTag() {
+        return TagEnum.SERVICE;
     }
 }

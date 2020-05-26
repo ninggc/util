@@ -2,10 +2,12 @@ package com.ninggc.util.common.aop.action.logger;
 
 public enum TagEnum {
     CONTROLLER("controller"),
-    SERVICE("service   "),
-    DAO("dao       "),
-    CUSTOM("custom    "),
-    METHOD("method    ");
+    SERVICE   ("service   "),
+    DAO       ("dao       "),
+    CUSTOM    ("custom    "),
+    METHOD    ("method    "),
+
+    DEFAULT   ("default   ");
 
     private String value;
 

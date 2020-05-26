@@ -1,5 +1,7 @@
 package com.ninggc.template.springbootfastdemo.project.web.controller;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.ninggc.template.springbootfastdemo.project.dao.SmsRecordMapper;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +20,14 @@ public class TestController {
 
     @Autowired
     ApplicationContext context;
+    @Autowired
+    private SmsRecordMapper smsRecordMapper;
+
+
+    @RequestMapping()
+    public Object test() {
+        return smsRecordMapper.selectById(3);
+    }
 
     @ApiOperation("获取所有的bean定义名")
     @GetMapping("/beans")

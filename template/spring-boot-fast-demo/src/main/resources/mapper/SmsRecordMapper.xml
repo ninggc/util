@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.ninggc.template.springbootfastdemo.project.dao.SMSRecordMapper">
-  <resultMap id="BaseResultMap" type="com.ninggc.template.springbootfastdemo.project.domain.SMSRecord">
+<mapper namespace="com.ninggc.template.springbootfastdemo.project.dao.SmsRecordMapper">
+  <resultMap id="BaseResultMap" type="com.ninggc.template.springbootfastdemo.project.domain.BdSmsRecord">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="user_id" jdbcType="BIGINT" property="userId" />
     <result column="type" jdbcType="INTEGER" property="type" />
@@ -15,7 +15,7 @@
     <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
     <result column="delete_flag" jdbcType="INTEGER" property="deleteFlag" />
   </resultMap>
-  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.ninggc.template.springbootfastdemo.project.domain.SMSRecord">
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.ninggc.template.springbootfastdemo.project.domain.BdSmsRecord">
     <result column="description" jdbcType="LONGVARCHAR" property="description" />
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -98,7 +98,7 @@
     delete from bd_sms_record
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.ninggc.template.springbootfastdemo.project.domain.SMSRecord">
+  <insert id="insert" parameterType="com.ninggc.template.springbootfastdemo.project.domain.BdSmsRecord">
     insert into bd_sms_record (id, user_id, type, 
       relative_id, phone, send_date, 
       batch_id, status, complete_date, 
@@ -110,7 +110,7 @@
       #{updateDate,jdbcType=TIMESTAMP}, #{createDate,jdbcType=TIMESTAMP}, #{deleteFlag,jdbcType=INTEGER}, 
       #{description,jdbcType=LONGVARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.ninggc.template.springbootfastdemo.project.domain.SMSRecord">
+  <insert id="insertSelective" parameterType="com.ninggc.template.springbootfastdemo.project.domain.BdSmsRecord">
     insert into bd_sms_record
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -195,7 +195,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.ninggc.template.springbootfastdemo.project.domain.SMSRecord">
+  <update id="updateByPrimaryKeySelective" parameterType="com.ninggc.template.springbootfastdemo.project.domain.BdSmsRecord">
     update bd_sms_record
     <set>
       <if test="userId != null">
@@ -237,7 +237,7 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.ninggc.template.springbootfastdemo.project.domain.SMSRecord">
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.ninggc.template.springbootfastdemo.project.domain.BdSmsRecord">
     update bd_sms_record
     set user_id = #{userId,jdbcType=BIGINT},
       type = #{type,jdbcType=INTEGER},
@@ -253,7 +253,7 @@
       description = #{description,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.ninggc.template.springbootfastdemo.project.domain.SMSRecord">
+  <update id="updateByPrimaryKey" parameterType="com.ninggc.template.springbootfastdemo.project.domain.BdSmsRecord">
     update bd_sms_record
     set user_id = #{userId,jdbcType=BIGINT},
       type = #{type,jdbcType=INTEGER},

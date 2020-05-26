@@ -2,7 +2,7 @@ package com.ninggc.template.springbootfastdemo.project.domain;
 
 import java.util.Date;
 
-public class SMSRecord {
+public class BdSmsRecord {
     private Integer id;
 
     private Long userId;

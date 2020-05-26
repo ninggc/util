@@ -18,7 +18,7 @@ public class CustomAopConfigurationImpl extends AopConfiguration {
     protected void pointCutMethod() { }
 
     @Override
-    public String getTag() {
-        return TagEnum.CUSTOM.getValue();
+    public TagEnum getTag() {
+        return TagEnum.CUSTOM;
     }
 }

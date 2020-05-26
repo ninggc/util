@@ -1,15 +1,13 @@
 package com.ninggc.template.springbootfastdemo;
 
-import com.ninggc.template.springbootfastdemo.project.dao.SMSRecordMapper;
+import com.ninggc.template.springbootfastdemo.project.dao.SmsRecordMapper;
 import com.ninggc.template.springbootfastdemo.project.dao.UserMapper;
-import com.ninggc.template.springbootfastdemo.project.domain.SMSRecord;
-import com.ninggc.template.springbootfastdemo.project.domain.SMSRecordExample;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.event.ApplicationStartedEvent;
-import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+//import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.support.AbstractApplicationContext;
@@ -31,7 +29,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @MapperScan("com.ninggc.template.springbootfastdemo.project.dao")
 @EnableTransactionManagement
 @RestController
-@EnableDiscoveryClient
+//@EnableDiscoveryClient
 public class SpringBootFastDemoApplication implements ApplicationListener<ApplicationStartedEvent> {
 
     @Autowired
@@ -40,7 +38,7 @@ public class SpringBootFastDemoApplication implements ApplicationListener<Applic
     @Autowired
     UserMapper userMapper;
     @Autowired
-    SMSRecordMapper smsRecordMapper;
+    SmsRecordMapper smsRecordMapper;
 
     public static void main(String[] args) {
         SpringApplication.run(SpringBootFastDemoApplication.class, args);
@@ -48,6 +46,8 @@ public class SpringBootFastDemoApplication implements ApplicationListener<Applic
 
     @Override
     public void onApplicationEvent(ApplicationStartedEvent event) {
+//        smsRecordMapper.selectById(3);
+//        smsRecordMapper.selectById(3);
         System.out.println("onApplicationEvent");
 //        AopContext.currentProxy();
     }
@@ -61,12 +61,4 @@ public class SpringBootFastDemoApplication implements ApplicationListener<Applic
                 .build();
     }
 
-    @RequestMapping("test")
-    public Object test() {
-//        SMSRecordExample example = new SMSRecordExample();
-//        example.createCriteria().andIdEqualTo(1);
-//        return smsRecordMapper.selectByExample(example);
-        return smsRecordMapper.selectByPrimaryKey(1);
-//        return userMapper.selectByPrimaryKey(1L);
-    }
 }
