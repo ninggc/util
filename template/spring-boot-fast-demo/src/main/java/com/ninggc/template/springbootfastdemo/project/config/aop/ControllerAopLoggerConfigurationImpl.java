@@ -1,9 +1,9 @@
 package com.ninggc.template.springbootfastdemo.project.config.aop;
 
-import com.ninggc.util.common.aop.adapter.anno.AopAdapterConfig;
 import com.ninggc.template.springbootfastdemo.project.config.aop.adapter.WrapVOAdapter;
 import com.ninggc.util.common.aop.AopConfiguration;
 import com.ninggc.util.common.aop.action.logger.TagEnum;
+import com.ninggc.util.common.aop.adapter.anno.AopAdapterConfig;
 import com.ninggc.util.common.aop.adapter.impl.LoggerAopAdapter;
 import com.ninggc.util.common.aop.adapter.impl.ValidateAopAdapter;
 import org.aspectj.lang.annotation.Aspect;

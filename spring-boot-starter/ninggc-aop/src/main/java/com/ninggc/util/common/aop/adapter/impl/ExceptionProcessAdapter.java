@@ -1,14 +1,14 @@
 package com.ninggc.util.common.aop.adapter.impl;
 
-import com.ninggc.util.common.aop.AopAdapter;
 import com.ninggc.util.common.aop.action.logger.IAopLoggerHandler;
 import com.ninggc.util.common.aop.action.logger.TagEnum;
 import com.ninggc.util.common.aop.adapter.IAopAdapter;
+import com.ninggc.util.common.aop.adapter.anno.AopAdapter;
 import com.ninggc.util.common.aop.interceptor.UrlLogInterceptor;
 import com.ninggc.util.common.aop.util.IUtilGson;
-import com.ninggc.util.common.aop.util.IUtilLogger;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.reflect.MethodSignature;
+import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -17,6 +17,12 @@ import java.lang.annotation.Annotation;
 @AopAdapter
 public class ExceptionProcessAdapter implements IAopAdapter, IUtilGson {
     private IAopLoggerHandler aopLoggerHandler;
+
+    @Override
+    public void initAopAdapter(Object... objects) {
+        Assert.isTrue(objects.length >= 1, "初始化" + this.getClass().getName() + "的参数不正确");
+        this.aopLoggerHandler = (IAopLoggerHandler) objects[0];
+    }
 
     @Override
     public void doBefore(JoinPoint joinPoint, String[] parameterNames, Object[] args) {

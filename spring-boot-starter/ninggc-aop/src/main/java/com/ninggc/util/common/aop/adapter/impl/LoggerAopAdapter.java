@@ -1,21 +1,17 @@
 package com.ninggc.util.common.aop.adapter.impl;
 
-import com.ninggc.util.common.aop.adapter.anno.AopAdapter;
 import com.ninggc.util.common.aop.action.logger.IAopLoggerHandler;
 import com.ninggc.util.common.aop.action.logger.IgnoredMethod;
 import com.ninggc.util.common.aop.action.logger.TagEnum;
 import com.ninggc.util.common.aop.adapter.IAopAdapter;
-import com.ninggc.util.common.aop.interceptor.UrlLogInterceptor;
+import com.ninggc.util.common.aop.adapter.anno.AopAdapter;
 import com.ninggc.util.common.aop.util.IUtilGson;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.context.annotation.Scope;
 import org.springframework.util.Assert;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.validation.constraints.NotNull;
-import java.lang.annotation.Annotation;
 import java.util.*;
 
 /**
@@ -147,7 +143,7 @@ public class LoggerAopAdapter implements IAopAdapter, IUtilGson {
 
     @Override
     public void initAopAdapter(Object... objects) {
-        Assert.isTrue(objects.length == 1, "初始化" + this.getClass().getName() + "的参数不正确");
+        Assert.isTrue(objects.length >= 1, "初始化" + this.getClass().getName() + "的参数不正确");
         this.aopLoggerHandler = (IAopLoggerHandler) objects[0];
     }
 

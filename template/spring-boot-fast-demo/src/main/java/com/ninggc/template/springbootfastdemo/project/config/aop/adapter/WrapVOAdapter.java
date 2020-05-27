@@ -1,8 +1,8 @@
 package com.ninggc.template.springbootfastdemo.project.config.aop.adapter;
 
 import com.ninggc.common.web.ResponseData;
-import com.ninggc.util.common.aop.AopAdapter;
 import com.ninggc.util.common.aop.adapter.IAopAdapter;
+import com.ninggc.util.common.aop.adapter.anno.AopAdapter;
 import com.ninggc.util.common.aop.util.IUtilGson;
 import org.aspectj.lang.JoinPoint;
 import org.springframework.context.annotation.Scope;
