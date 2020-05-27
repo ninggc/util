@@ -1,6 +1,6 @@
 package com.ninggc.util.common.aop.adapter.impl;
 
-import com.ninggc.util.common.aop.AopAdapter;
+import com.ninggc.util.common.aop.adapter.anno.AopAdapter;
 import com.ninggc.util.common.aop.adapter.IAopAdapter;
 import org.aspectj.lang.JoinPoint;
 

@@ -1,4 +1,4 @@
-package com.ninggc.util.common.aop;
+package com.ninggc.util.common.aop.adapter.anno;
 
 import org.springframework.core.annotation.AliasFor;
 import org.springframework.stereotype.Component;

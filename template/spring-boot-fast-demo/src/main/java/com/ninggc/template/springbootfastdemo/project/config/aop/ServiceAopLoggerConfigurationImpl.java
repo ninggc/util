@@ -1,6 +1,6 @@
 package com.ninggc.template.springbootfastdemo.project.config.aop;
 
-import com.ninggc.util.common.aop.AopAdapterConfig;
+import com.ninggc.util.common.aop.adapter.anno.AopAdapterConfig;
 import com.ninggc.util.common.aop.AopConfiguration;
 import com.ninggc.util.common.aop.action.logger.TagEnum;
 import com.ninggc.util.common.aop.adapter.impl.LoggerAopAdapter;

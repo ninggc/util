@@ -1,4 +1,4 @@
-package com.ninggc.util.common.aop;
+package com.ninggc.util.common.aop.adapter.anno;
 
 import com.ninggc.util.common.aop.adapter.IAopAdapter;
 

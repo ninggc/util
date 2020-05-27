@@ -36,11 +36,11 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-log4j2</artifactId>
         </dependency>
-        <dependency>
-            <groupId>com.ninggc.morphia.core</groupId>
-            <artifactId>ninggc-morphia-spring-boot-starter</artifactId>
-            <version>1.0.0</version>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>com.ninggc.morphia.core</groupId>-->
+<!--            <artifactId>ninggc-morphia-spring-boot-starter</artifactId>-->
+<!--            <version>1.0.0</version>-->
+<!--        </dependency>-->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
@@ -51,12 +51,12 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
-        <dependency>
-            <groupId>com.ninggc.util</groupId>
-            <artifactId>auto-generate-instance</artifactId>
-            <version>1.0.0</version>
-            <scope>compile</scope>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>com.ninggc.util</groupId>-->
+<!--            <artifactId>auto-generate-instance</artifactId>-->
+<!--            <version>1.0.0</version>-->
+<!--            <scope>compile</scope>-->
+<!--        </dependency>-->
         <dependency>
             <groupId>redis.clients</groupId>
             <artifactId>jedis</artifactId>

@@ -2,6 +2,8 @@ package com.ninggc.util.common.aop;
 
 import com.ninggc.util.common.aop.action.logger.IAopLoggerHandler;
 import com.ninggc.util.common.aop.adapter.IAopAdapter;
+import com.ninggc.util.common.aop.adapter.anno.AopAdapter;
+import com.ninggc.util.common.aop.adapter.anno.AopAdapterConfig;
 import com.ninggc.util.common.aop.adapter.impl.LoggerAopAdapter;
 import com.ninggc.util.common.aop.util.IUtilGson;
 import com.ninggc.util.common.aop.util.IUtilLogger;

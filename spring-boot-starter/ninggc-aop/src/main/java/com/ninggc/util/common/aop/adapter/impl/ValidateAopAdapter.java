@@ -1,6 +1,6 @@
 package com.ninggc.util.common.aop.adapter.impl;
 
-import com.ninggc.util.common.aop.AopAdapter;
+import com.ninggc.util.common.aop.adapter.anno.AopAdapter;
 import com.ninggc.util.common.aop.action.validate.ConstraintValidator;
 import com.ninggc.util.common.aop.action.validate.Validate;
 import com.ninggc.util.common.aop.action.validate.Validator;
