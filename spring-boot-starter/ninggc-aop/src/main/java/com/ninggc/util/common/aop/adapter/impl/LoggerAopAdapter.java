@@ -16,9 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.validation.constraints.NotNull;
 import java.lang.annotation.Annotation;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.Objects;
+import java.util.*;
 
 /**
  * @author ninggc
@@ -31,7 +29,7 @@ public class LoggerAopAdapter implements IAopAdapter, IUtilGson {
     @Override
     public void doBefore(JoinPoint joinPoint, String[] parameterNames, Object[] args) {
         String classAndMethodName = joinPoint.getSignature().toShortString();
-        if (aopLoggerHandler.getTag().equals(TagEnum.CONTROLLER.getValue())) {
+        if (isController()) {
             // controller开始的时候清一下之前请求的信息
             currentThreadServiceDepth.set(0);
             currentThreadLogs.set(new ArrayList<>());
@@ -47,20 +45,6 @@ public class LoggerAopAdapter implements IAopAdapter, IUtilGson {
                 .append(classAndMethodName)
                 .append("\tparams --> ");
 
-        // 找到方法上标注了@RequestBody注解的字段
-        Integer foWithRequestBody = -1;
-        if (TagEnum.CONTROLLER.getValue().equals(aopLoggerHandler.getTag())) {
-            MethodSignature signature = (MethodSignature) joinPoint.getSignature();
-            if (signature.getMethod().getAnnotation(PostMapping.class) != null) {
-                for (int i1 = 0; i1 < signature.getMethod().getParameterAnnotations().length; i1++) {
-                    for (Annotation annotation : signature.getMethod().getParameterAnnotations()[i1]) {
-                        if (annotation instanceof RequestBody) {
-                            foWithRequestBody = i1;
-                        }
-                    }
-                }
-            }
-        }
 
         for (int i = 0; i < args.length; i++) {
             logContent.append("{")
@@ -75,14 +59,6 @@ public class LoggerAopAdapter implements IAopAdapter, IUtilGson {
             } else {
                 try {
                     argsShow = gson.toJson(args[i]);
-                    if (foWithRequestBody.equals(i)) {
-                        // 将标注了@RequestBody的字段的值给到拦截器上
-                        StringBuilder curlBuilder = UrlLogInterceptor.curlBuilder.get();
-                        if (curlBuilder != null) {
-                            curlBuilder.append(" --data-raw '").append(argsShow).append("' ");
-                            info(curlBuilder.toString());
-                        }
-                    }
                 } catch (Exception e) {
                     argsShow = "无法打印";
                     warn(parameterNames[i] + "无法打印: " + e.getMessage());
@@ -100,7 +76,7 @@ public class LoggerAopAdapter implements IAopAdapter, IUtilGson {
     public Object doAfterReturn(JoinPoint joinPoint, Object returnValue) {
         String classAndMethodName = joinPoint.getSignature().toShortString();
         if (checkBeforeLog(joinPoint)) {
-            return returnValue;
+            return null;
         }
 
         StringBuilder logContent = initLogContent();
@@ -128,7 +104,7 @@ public class LoggerAopAdapter implements IAopAdapter, IUtilGson {
                 .append(argsShow);
         // endregion
         info(logContent.toString());
-        if (aopLoggerHandler.getTag().equals(TagEnum.CONTROLLER.getValue())) {
+        if (isController()) {
             if (currentThreadNeedToLog.get()) {
                 // 只在controller结束的时候打印
                 errorCurrentThread(logContent.toString());
@@ -155,7 +131,7 @@ public class LoggerAopAdapter implements IAopAdapter, IUtilGson {
                 .append("\tname: ").append(exception.getClass().getName());
 
         error(logContent.toString(), exception);
-        if (aopLoggerHandler.getTag().equals(TagEnum.CONTROLLER.getValue()) && currentThreadNeedToLog.get()) {
+        if (isController() && currentThreadNeedToLog.get()) {
             // 只在controller结束的时候打印
             errorCurrentThread(logContent.toString());
         }
@@ -183,11 +159,11 @@ public class LoggerAopAdapter implements IAopAdapter, IUtilGson {
     private StringBuilder initLogContent() {
         StringBuilder logContent = new StringBuilder();
         // 不同类型的日志样式不同
-        if (aopLoggerHandler.getTag().equals(TagEnum.SERVICE.getValue())) {
+        if (TagEnum.SERVICE.equals(aopLoggerHandler.getTag())) {
             for (int i = 0; i < currentThreadServiceDepth.get(); i++) {
                 logContent.append("-— ");
             }
-        } else if (aopLoggerHandler.getTag().equals(TagEnum.CONTROLLER.getValue())) {
+        } else if (isController()) {
             logContent.append("## ");
         } else {
             logContent.append("======== ");
@@ -196,25 +172,55 @@ public class LoggerAopAdapter implements IAopAdapter, IUtilGson {
         return logContent;
     }
 
+    private boolean isController() {
+        return TagEnum.CONTROLLER.equals(aopLoggerHandler.getTag());
+    }
+
     /**
      * 对需要打印的PO返回true
      * o 为空的逻辑在之前处理
      */
     protected boolean isLogIt(@NotNull Object o) {
+        if (o.getClass().isInterface() || o.getClass().getName().contains("Impl")) {
+            return false;
+        }
         if (o.getClass().getName().contains("bigdata")) {
             return true;
+        }
+        // if (o instanceof Page) {
+        //     return true;
+        // }
+        if (o instanceof List) {
+            List list = (List) o;
+            if (list.size() == 0) {
+                return true;
+            } else {
+                return isLogIt(list.get(0));
+            }
+        }
+        if (o instanceof Map) {
+            Map map = (Map) o;
+            if (map.size() == 0) {
+                return true;
+            } else {
+                Iterator set = map.keySet().iterator();
+                Iterator values = map.values().iterator();
+                return isLogIt(set) && isLogIt(values);
+            }
         }
         if (o instanceof Iterable) {
             Iterator iterator = ((Iterable) o).iterator();
             if (iterator.hasNext()) {
                 // 递归处理，list类型可以打印，map类型暂时不打印
-                isLogIt(iterator.next());
+                return isLogIt(iterator.next());
             } else {
                 return true;
             }
         }
         return o.getClass().getName().contains("java.lang");
     }
+
+
 
     /**
      * 因为LoggerAopAdapter不是单例，所以重写equal

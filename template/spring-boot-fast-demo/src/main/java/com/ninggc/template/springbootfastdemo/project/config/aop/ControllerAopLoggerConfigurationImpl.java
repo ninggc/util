@@ -1,6 +1,7 @@
 package com.ninggc.template.springbootfastdemo.project.config.aop;
 
 import com.ninggc.util.common.aop.adapter.anno.AopAdapterConfig;
+import com.ninggc.template.springbootfastdemo.project.config.aop.adapter.WrapVOAdapter;
 import com.ninggc.util.common.aop.AopConfiguration;
 import com.ninggc.util.common.aop.action.logger.TagEnum;
 import com.ninggc.util.common.aop.adapter.impl.LoggerAopAdapter;
@@ -16,7 +17,7 @@ import org.springframework.stereotype.Component;
  */
 @Component
 @Aspect
-@AopAdapterConfig(acceptAdapters = {LoggerAopAdapter.class, ValidateAopAdapter.class})
+@AopAdapterConfig(acceptAdapters = {LoggerAopAdapter.class, ValidateAopAdapter.class, WrapVOAdapter.class})
 public class ControllerAopLoggerConfigurationImpl extends AopConfiguration {
 
 //    @Pointcut("execution(* com.ninggc.template.springbootfastdemo.project.web.controller.*..*(..))")
@@ -27,7 +28,7 @@ public class ControllerAopLoggerConfigurationImpl extends AopConfiguration {
     }
 
     @Override
-    public String getTag() {
-        return TagEnum.CONTROLLER.getValue();
+    public TagEnum getTag() {
+        return TagEnum.CONTROLLER;
     }
 }

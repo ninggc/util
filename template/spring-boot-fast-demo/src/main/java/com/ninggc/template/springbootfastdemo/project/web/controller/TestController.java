@@ -1,9 +1,7 @@
 package com.ninggc.template.springbootfastdemo.project.web.controller;
 
-import com.ninggc.template.springbootfastdemo.project.entity.BaseEntity;
-import com.ninggc.template.springbootfastdemo.project.entity.UserEntity;
-import com.ninggc.template.springbootfastdemo.project.web.controller.fo.BaseAndUserVO;
-import com.ninggc.template.springbootfastdemo.project.web.controller.fo.StringFO;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.ninggc.template.springbootfastdemo.project.dao.SmsRecordMapper;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,17 +20,20 @@ public class TestController {
 
     @Autowired
     ApplicationContext context;
+    @Autowired
+    private SmsRecordMapper smsRecordMapper;
+
+
+    @RequestMapping()
+    public Object test() {
+        // smsRecordMapper.selectPage()
+        return smsRecordMapper.selectById(3);
+    }
 
     @ApiOperation("获取所有的bean定义名")
     @GetMapping("/beans")
     public String[] beans() {
         return context.getBeanDefinitionNames();
-    }
-
-    @ApiOperation("测试一个VO返回两个实体")
-    @GetMapping("")
-    public Object test(StringFO stringFO) {
-        return new BaseAndUserVO().setBaseEntity(new BaseEntity()).setUserEntity(new UserEntity());
     }
 
     @ApiOperation("Just return 'again'")

@@ -7,8 +7,8 @@ import java.util.Collection;
 
 public interface IAopLoggerHandler extends IUtilGson {
     /* 自定义输出日志的标签 */
-    default String getTag() {
-        return "null";
+    default TagEnum getTag() {
+        return TagEnum.DEFAULT;
     }
 
     /* 自定义不发出警告的程序最大执行时间，单位ms，默认未300 */
