@@ -1,25 +1,28 @@
-//package com.ninggc.template.springbootfastdemo.project.config.aop;
-//
-//import com.ninggc.template.springbootfastdemo.common.config.aop.AopAdapterConfig;
-//import com.ninggc.template.springbootfastdemo.common.config.aop.AopConfiguration;
-//import com.ninggc.template.springbootfastdemo.common.config.aop.adapter.IAopAdapter;
-//import com.ninggc.template.springbootfastdemo.common.config.aop.adapter.impl.LoggerAopAdapter;
-//import org.aspectj.lang.annotation.*;
-//import org.springframework.stereotype.Component;
-//
-///**
-// * 控制controller的函数的入口和出口处打印日志
-// */
-//@Component
-//@Aspect
-//@AopAdapterConfig(acceptAdapters = LoggerAopAdapter.class)
-//public class DaoAopLoggerConfigurationImpl extends AopConfiguration {
-//    @Pointcut("execution(* com.ninggc.template.springbootfastdemo.project.dao.DaoFactory.*..*(..))")
-//    protected void pointCutMethod() { }
-//
-//    @Override
-//    public String getTag() {
-//        return "dao";
-//    }
-//
-//}
+package com.ninggc.template.springbootfastdemo.project.config.aop;
+
+import com.ninggc.util.common.aop.AopConfiguration;
+import com.ninggc.util.common.aop.action.logger.TagEnum;
+import com.ninggc.util.common.aop.adapter.anno.AopAdapterConfig;
+import com.ninggc.util.common.aop.adapter.impl.LoggerAopAdapter;
+import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Pointcut;
+import org.springframework.stereotype.Component;
+
+/**
+ * 控制dao的函数的入口和出口处打印日志
+ */
+@Component
+@Aspect
+@AopAdapterConfig(acceptAdapters = LoggerAopAdapter.class)
+public class DaoAopLoggerConfigurationImpl extends AopConfiguration {
+   @Override
+   @Pointcut("execution(* com.ninggc.template.springbootfastdemo.project.dao.*..*(..))")
+   protected void pointCutMethod() {
+   }
+
+   @Override
+   public TagEnum getTag() {
+      return TagEnum.DAO;
+   }
+
+}

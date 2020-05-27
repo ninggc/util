@@ -25,8 +25,8 @@
 
         <module>spring-boot-starter/ninggc-aop</module>
         <module>spring-boot-starter/ninggc-aop-spring-boot-starter</module>
-        <module>spring-boot-starter/ninggc-morphia</module>
-        <module>spring-boot-starter/ninggc-morphia-spring-boot-starter</module>
+        <!--        <module>spring-boot-starter/ninggc-morphia</module>-->
+        <!--        <module>spring-boot-starter/ninggc-morphia-spring-boot-starter</module>-->
 
         <module>template/spring-boot-fast-demo</module>
         <module>tool/curl-parser</module>

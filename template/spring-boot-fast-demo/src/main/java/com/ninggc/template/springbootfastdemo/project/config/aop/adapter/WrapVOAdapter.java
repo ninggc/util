@@ -20,6 +20,7 @@ public class WrapVOAdapter implements IAopAdapter, IUtilGson {
         if (returnValue instanceof ResponseData) {
             return returnValue;
         } else {
+            // 包装controller的返回值
             return ResponseData.buildSuccess(returnValue);
         }
     }
