@@ -106,7 +106,7 @@ public class LoggerAopAdapter implements IAopAdapter, IUtilGson {
                 errorCurrentThread(logContent.toString());
             }
         }
-        return returnValue;
+        return null;
     }
 
     @Override
