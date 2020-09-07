@@ -42,6 +42,12 @@
             <version>1.18.8</version>
         </dependency>
 
+        <!-- 使用Shiro认证 -->
+        <dependency>
+            <groupId>org.apache.shiro</groupId>
+            <artifactId>shiro-spring-boot-web-starter</artifactId>
+            <version>1.5.3</version>
+        </dependency>
 
         <dependency>
             <groupId>org.springframework.boot</groupId>

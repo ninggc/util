@@ -6,6 +6,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -25,8 +26,10 @@ public class TestController {
 
 
     @RequestMapping()
+    @Transactional
     public Object test() {
         // smsRecordMapper.selectPage()
+        smsRecordMapper.selectById(3);
         return smsRecordMapper.selectById(3);
     }
 

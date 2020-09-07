@@ -3,6 +3,7 @@ package com.ninggc.util.common.aop.util;
 import com.ninggc.util.common.aop.AopConfiguration;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.core.NamedThreadLocal;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,25 +13,25 @@ import java.util.List;
  */
 public interface IUtilLogger {
     Logger aopLogger = LogManager.getLogger(AopConfiguration.class);
-    ThreadLocal<List<String>> currentThreadLogs = new ThreadLocal<List<String>>() {
+    ThreadLocal<List<String>> currentThreadLogs = new NamedThreadLocal<List<String>>("currentThreadLogs") {
         @Override
         protected List<String> initialValue() {
             return new ArrayList<>();
         }
     };
-    ThreadLocal<Boolean> currentThreadNeedToLog = new ThreadLocal<Boolean>() {
+    ThreadLocal<Boolean> currentThreadNeedToLog = new NamedThreadLocal<Boolean>("currentThreadNeedToLog") {
         @Override
         protected Boolean initialValue() {
             return false;
         }
     };
-    ThreadLocal<Throwable> currentThreadThrowable = new ThreadLocal<Throwable>() {
+    ThreadLocal<Throwable> currentThreadThrowable = new NamedThreadLocal<Throwable>("currentThreadThrowable") {
         @Override
         protected Throwable initialValue() {
             return super.initialValue();
         }
     };
-    ThreadLocal<Integer> currentThreadServiceDepth = new ThreadLocal<Integer>() {
+    ThreadLocal<Integer> currentThreadServiceDepth = new NamedThreadLocal<Integer>("currentThreadServiceDepth") {
         @Override
         protected Integer initialValue() {
             return 0;

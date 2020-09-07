@@ -10,3 +10,7 @@ spring:
 mybatis:
   mapper-locations: classpath:mapper/*Mapper.xml
 #  type-aliases-package: com.example.entity
+#logging:
+#  level: trace
+server:
+  port: 7000

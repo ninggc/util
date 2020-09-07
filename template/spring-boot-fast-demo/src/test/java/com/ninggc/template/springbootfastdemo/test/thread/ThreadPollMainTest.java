@@ -5,6 +5,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class ThreadPollMainTest {
@@ -20,6 +21,8 @@ public class ThreadPollMainTest {
     @Test
     public void test1() {
         ThreadFactoryBuilder threadFactoryBuilder = new ThreadFactoryBuilder();
-        Executors.newCachedThreadPool(threadFactoryBuilder.build());
+        ExecutorService cachedThreadPool = Executors.newCachedThreadPool(threadFactoryBuilder.build());
+
+        System.out.println("");
     }
 }

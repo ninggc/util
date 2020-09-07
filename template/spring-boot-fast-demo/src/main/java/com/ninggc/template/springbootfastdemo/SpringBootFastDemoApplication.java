@@ -1,9 +1,13 @@
 package com.ninggc.template.springbootfastdemo;
 
+import com.google.common.collect.Lists;
 import com.ninggc.template.springbootfastdemo.project.dao.SmsRecordMapper;
 import com.ninggc.template.springbootfastdemo.project.dao.UserMapper;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.ApplicationArguments;
+import org.springframework.boot.ApplicationRunner;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.event.ApplicationStartedEvent;
@@ -20,6 +24,9 @@ import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
+import java.util.HashMap;
+import java.util.List;
+
 /**
  * @author ninggc
  */
@@ -30,7 +37,8 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableTransactionManagement
 @RestController
 //@EnableDiscoveryClient
-public class SpringBootFastDemoApplication implements ApplicationListener<ApplicationStartedEvent> {
+public class SpringBootFastDemoApplication implements ApplicationListener<ApplicationStartedEvent>
+        , ApplicationRunner, CommandLineRunner {
 
     @Autowired
     AbstractApplicationContext context;
@@ -61,4 +69,13 @@ public class SpringBootFastDemoApplication implements ApplicationListener<Applic
                 .build();
     }
 
+    @Override
+    public void run(ApplicationArguments args) throws Exception {
+        System.out.println("");
+    }
+
+    @Override
+    public void run(String... args) throws Exception {
+        System.out.println("");
+    }
 }
