@@ -88,17 +88,6 @@
     <logger name="org.apache.http" level="warn"/>
     <logger name="org.hibernate" level="error"/>
 
-    <!--    AOP打印的非错误日志-->
-    <logger name="com.wondersgroup.bigdata.common.aop.AopConfiguration" level="info" additivity="false">
-      <appender-ref ref="aop_appender"/>
-      <appender-ref ref="error_appender"/>
-    </logger>
-
-    <!--    log4j2utils的日志-->
-    <logger name="com.wondersgroup.bigdata.project.utils.Log4j2Utils" level="info" additivity="false">
-      <appender-ref ref="log4j2utils"/>
-    </logger>
-
   </Loggers>
 
 </configuration>

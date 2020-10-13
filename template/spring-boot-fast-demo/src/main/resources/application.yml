@@ -1,8 +1,8 @@
 spring:
   datasource:
     username: root
-    password: 906978985
-    url: jdbc:mysql://localhost:3306/sso?useUnicode=true&characterEncoding=UTF-8&useSSL=false&allowPublicKeyRetrieval=true
+    password: root
+    url: jdbc:mysql://wonders.ninggc.cn:3406/turing-test?useUnicode=true&characterEncoding=UTF-8&useSSL=false&allowPublicKeyRetrieval=true
     driver-class-name: com.mysql.jdbc.Driver
     type: com.alibaba.druid.pool.DruidDataSource
 

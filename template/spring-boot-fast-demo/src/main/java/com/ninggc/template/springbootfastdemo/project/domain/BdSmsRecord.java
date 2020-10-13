@@ -1,8 +1,9 @@
 package com.ninggc.template.springbootfastdemo.project.domain;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class BdSmsRecord {
+public class BdSmsRecord implements Serializable {
     private Integer id;
 
     private Long userId;
