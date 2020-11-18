@@ -26,7 +26,8 @@
     </Console>
 
     <!-- INFO级别日志 -->
-    <RollingRandomAccessFile name="info_appender" immediateFlush="true" fileName="${LOG_HOME}/info.log" filePattern="${LOG_HOME}/info/info - %d{yyyy-MM-dd HH_mm_ss}.log">
+    <RollingRandomAccessFile name="info_appender" immediateFlush="true" fileName="${LOG_HOME}/info.log"
+                             filePattern="${LOG_HOME}/info/info - %d{yyyy-MM-dd HH_mm_ss}.log">
       <PatternLayout charset="UTF-8" pattern="${LOG_PATTERNLAYOUT}"/>
       <Policies>
         <SizeBasedTriggeringPolicy size="2MB"/>
@@ -38,7 +39,8 @@
     </RollingRandomAccessFile>
 
     <!-- ERROR级别日志 -->
-    <RollingRandomAccessFile name="error_appender" immediateFlush="true" fileName="${LOG_HOME}/error.log" filePattern="${LOG_HOME}/error/error - %d{yyyy-MM-dd HH_mm_ss}.log">
+    <RollingRandomAccessFile name="error_appender" immediateFlush="true" fileName="${LOG_HOME}/error.log"
+                             filePattern="${LOG_HOME}/error/error - %d{yyyy-MM-dd HH_mm_ss}.log">
       <PatternLayout charset="UTF-8" pattern="${LOG_PATTERNLAYOUT}"/>
       <Policies>
         <SizeBasedTriggeringPolicy size="2MB"/>

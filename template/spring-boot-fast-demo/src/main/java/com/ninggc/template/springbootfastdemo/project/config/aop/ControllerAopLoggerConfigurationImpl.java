@@ -20,7 +20,7 @@ import org.springframework.stereotype.Component;
 @AopAdapterConfig(acceptAdapters = {LoggerAopAdapter.class, ValidateAopAdapter.class, WrapVOAdapter.class})
 public class ControllerAopLoggerConfigurationImpl extends AopConfiguration {
 
-//    @Pointcut("execution(* com.ninggc.template.springbootfastdemo.project.web.controller.*..*(..))")
+    //    @Pointcut("execution(* com.ninggc.template.springbootfastdemo.project.web.controller.*..*(..))")
     @Pointcut("(execution(* com.ninggc.template.springbootfastdemo.project.web..*.*(..))) " +
             "and (@within(org.springframework.stereotype.Controller))")
     @Override

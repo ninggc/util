@@ -13,7 +13,8 @@ import javax.validation.constraints.NotBlank;
 public class RedisProperties {
     @NotBlank
     private String host;
-    @Min(0) @Max(65535)
+    @Min(0)
+    @Max(65535)
     private Integer port;
     @Min(0)
     private Integer database;

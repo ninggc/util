@@ -26,6 +26,7 @@ public class ProxyExample {
             this.i = i;
         }
     }
+
     static class A implements InvocationHandler {
         private Object obj;
 

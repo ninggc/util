@@ -1,8 +1,8 @@
 package com.ninggc.template.springbootfastdemo.project.config.aop;
 
-import com.ninggc.util.common.aop.adapter.anno.AopAdapterConfig;
 import com.ninggc.util.common.aop.AopConfiguration;
 import com.ninggc.util.common.aop.action.logger.TagEnum;
+import com.ninggc.util.common.aop.adapter.anno.AopAdapterConfig;
 import com.ninggc.util.common.aop.adapter.impl.LoggerAopAdapter;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
@@ -15,7 +15,8 @@ public class CustomAopConfigurationImpl extends AopConfiguration {
 
     @Override
     @Pointcut("@annotation(com.ninggc.util.common.aop.MethodLog)")
-    protected void pointCutMethod() { }
+    protected void pointCutMethod() {
+    }
 
     @Override
     public TagEnum getTag() {

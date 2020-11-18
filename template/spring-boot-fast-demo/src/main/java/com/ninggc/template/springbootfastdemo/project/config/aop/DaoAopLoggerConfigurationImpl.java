@@ -15,14 +15,14 @@ import org.springframework.stereotype.Component;
 @Aspect
 @AopAdapterConfig(acceptAdapters = LoggerAopAdapter.class)
 public class DaoAopLoggerConfigurationImpl extends AopConfiguration {
-   @Override
-   @Pointcut("execution(* com.ninggc.template.springbootfastdemo.project.dao.*..*(..))")
-   protected void pointCutMethod() {
-   }
+    @Override
+    @Pointcut("execution(* com.ninggc.template.springbootfastdemo.project.dao.*..*(..))")
+    protected void pointCutMethod() {
+    }
 
-   @Override
-   public TagEnum getTag() {
-      return TagEnum.DAO;
-   }
+    @Override
+    public TagEnum getTag() {
+        return TagEnum.DAO;
+    }
 
 }

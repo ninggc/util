@@ -2,21 +2,21 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ninggc.template.springbootfastdemo.project.dao.UserMapper">
   <resultMap id="BaseResultMap" type="com.ninggc.template.springbootfastdemo.project.domain.User">
-    <id column="id" jdbcType="BIGINT" property="id" />
-    <result column="login_username" jdbcType="VARCHAR" property="loginUsername" />
-    <result column="login_password" jdbcType="VARCHAR" property="loginPassword" />
-    <result column="role" jdbcType="TINYINT" property="role" />
-    <result column="salt" jdbcType="VARCHAR" property="salt" />
-    <result column="username" jdbcType="VARCHAR" property="username" />
-    <result column="email" jdbcType="VARCHAR" property="email" />
-    <result column="mobile" jdbcType="VARCHAR" property="mobile" />
-    <result column="status" jdbcType="TINYINT" property="status" />
-    <result column="headPortraitPath" jdbcType="VARCHAR" property="headportraitpath" />
-    <result column="description" jdbcType="VARCHAR" property="description" />
-    <result column="update_date" jdbcType="TIMESTAMP" property="updateDate" />
-    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
-    <result column="delete_flag" jdbcType="TINYINT" property="deleteFlag" />
-    <result column="init_status" jdbcType="TINYINT" property="initStatus" />
+    <id column="id" jdbcType="BIGINT" property="id"/>
+    <result column="login_username" jdbcType="VARCHAR" property="loginUsername"/>
+    <result column="login_password" jdbcType="VARCHAR" property="loginPassword"/>
+    <result column="role" jdbcType="TINYINT" property="role"/>
+    <result column="salt" jdbcType="VARCHAR" property="salt"/>
+    <result column="username" jdbcType="VARCHAR" property="username"/>
+    <result column="email" jdbcType="VARCHAR" property="email"/>
+    <result column="mobile" jdbcType="VARCHAR" property="mobile"/>
+    <result column="status" jdbcType="TINYINT" property="status"/>
+    <result column="headPortraitPath" jdbcType="VARCHAR" property="headportraitpath"/>
+    <result column="description" jdbcType="VARCHAR" property="description"/>
+    <result column="update_date" jdbcType="TIMESTAMP" property="updateDate"/>
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate"/>
+    <result column="delete_flag" jdbcType="TINYINT" property="deleteFlag"/>
+    <result column="init_status" jdbcType="TINYINT" property="initStatus"/>
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -48,27 +48,28 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, login_username, login_password, role, salt, username, email, mobile, status, 
+    id, login_username, login_password, role, salt, username, email, mobile, status,
     headPortraitPath, description, update_date, create_date, delete_flag, init_status
   </sql>
-  <select id="selectByExample" parameterType="com.ninggc.template.springbootfastdemo.project.domain.UserExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.ninggc.template.springbootfastdemo.project.domain.UserExample"
+          resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
     </if>
     'false' as QUERYID,
-    <include refid="Base_Column_List" />
+    <include refid="Base_Column_List"/>
     from bd_user_info
     <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
+      <include refid="Example_Where_Clause"/>
     </if>
     <if test="orderByClause != null">
       order by ${orderByClause}
     </if>
   </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
+    select
+    <include refid="Base_Column_List"/>
     from bd_user_info
     where id = #{id,jdbcType=BIGINT}
   </select>
@@ -77,18 +78,16 @@
     where id = #{id,jdbcType=BIGINT}
   </delete>
   <insert id="insert" parameterType="com.ninggc.template.springbootfastdemo.project.domain.User">
-    insert into bd_user_info (id, login_username, login_password, 
-      role, salt, username, 
-      email, mobile, status, 
-      headPortraitPath, description, update_date, 
-      create_date, delete_flag, init_status
-      )
-    values (#{id,jdbcType=BIGINT}, #{loginUsername,jdbcType=VARCHAR}, #{loginPassword,jdbcType=VARCHAR}, 
-      #{role,jdbcType=TINYINT}, #{salt,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, 
-      #{email,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, #{status,jdbcType=TINYINT}, 
-      #{headportraitpath,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{updateDate,jdbcType=TIMESTAMP}, 
-      #{createDate,jdbcType=TIMESTAMP}, #{deleteFlag,jdbcType=TINYINT}, #{initStatus,jdbcType=TINYINT}
-      )
+    insert into bd_user_info (id, login_username, login_password,
+                              role, salt, username,
+                              email, mobile, status,
+                              headPortraitPath, description, update_date,
+                              create_date, delete_flag, init_status)
+    values (#{id,jdbcType=BIGINT}, #{loginUsername,jdbcType=VARCHAR}, #{loginPassword,jdbcType=VARCHAR},
+            #{role,jdbcType=TINYINT}, #{salt,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR},
+            #{email,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, #{status,jdbcType=TINYINT},
+            #{headportraitpath,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{updateDate,jdbcType=TIMESTAMP},
+            #{createDate,jdbcType=TIMESTAMP}, #{deleteFlag,jdbcType=TINYINT}, #{initStatus,jdbcType=TINYINT})
   </insert>
   <insert id="insertSelective" parameterType="com.ninggc.template.springbootfastdemo.project.domain.User">
     insert into bd_user_info
@@ -237,20 +236,20 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.ninggc.template.springbootfastdemo.project.domain.User">
     update bd_user_info
-    set login_username = #{loginUsername,jdbcType=VARCHAR},
-      login_password = #{loginPassword,jdbcType=VARCHAR},
-      role = #{role,jdbcType=TINYINT},
-      salt = #{salt,jdbcType=VARCHAR},
-      username = #{username,jdbcType=VARCHAR},
-      email = #{email,jdbcType=VARCHAR},
-      mobile = #{mobile,jdbcType=VARCHAR},
-      status = #{status,jdbcType=TINYINT},
-      headPortraitPath = #{headportraitpath,jdbcType=VARCHAR},
-      description = #{description,jdbcType=VARCHAR},
-      update_date = #{updateDate,jdbcType=TIMESTAMP},
-      create_date = #{createDate,jdbcType=TIMESTAMP},
-      delete_flag = #{deleteFlag,jdbcType=TINYINT},
-      init_status = #{initStatus,jdbcType=TINYINT}
+    set login_username   = #{loginUsername,jdbcType=VARCHAR},
+        login_password   = #{loginPassword,jdbcType=VARCHAR},
+        role             = #{role,jdbcType=TINYINT},
+        salt             = #{salt,jdbcType=VARCHAR},
+        username         = #{username,jdbcType=VARCHAR},
+        email            = #{email,jdbcType=VARCHAR},
+        mobile           = #{mobile,jdbcType=VARCHAR},
+        status           = #{status,jdbcType=TINYINT},
+        headPortraitPath = #{headportraitpath,jdbcType=VARCHAR},
+        description      = #{description,jdbcType=VARCHAR},
+        update_date      = #{updateDate,jdbcType=TIMESTAMP},
+        create_date      = #{createDate,jdbcType=TIMESTAMP},
+        delete_flag      = #{deleteFlag,jdbcType=TINYINT},
+        init_status      = #{initStatus,jdbcType=TINYINT}
     where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>
