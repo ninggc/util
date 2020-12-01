@@ -23,7 +23,7 @@ import java.util.Properties;
 @Intercepts({@Signature(type = StatementHandler.class, method = "prepare", args = {Connection.class}),
         @Signature(type = ResultSetHandler.class, method = "handleResultSets", args = {Statement.class})})
 @Slf4j
-class PageHelper implements Interceptor {
+public class PageHelper implements Interceptor {
 
     public static final ThreadLocal<Page> localPage = new ThreadLocal<>();
 

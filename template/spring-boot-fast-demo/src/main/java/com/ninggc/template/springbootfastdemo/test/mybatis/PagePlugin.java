@@ -1,6 +1,7 @@
 package com.ninggc.template.springbootfastdemo.test.mybatis;
 
 import org.apache.ibatis.executor.Executor;
+import org.apache.ibatis.executor.SimpleExecutor;
 import org.apache.ibatis.mapping.MappedStatement;
 import org.apache.ibatis.plugin.*;
 import org.apache.ibatis.session.ResultHandler;
@@ -33,5 +34,11 @@ public class PagePlugin implements Interceptor {
         } else {
             return target;
         }
+    }
+
+    public static void main(String[] args) {
+        PagePlugin pagePlugin = new PagePlugin();
+        Executor plugin = (Executor) pagePlugin.plugin(new SimpleExecutor(null, null));
+        // plugin.
     }
 }

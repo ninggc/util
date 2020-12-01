@@ -2,12 +2,11 @@ package com.ninggc.template.springbootfastdemo.project.web.controller;
 
 import com.ninggc.template.springbootfastdemo.project.web.AbstractControllerTest;
 import org.junit.Test;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
-@PropertySource("classpath:morphia.properties")
+// @PropertySource("classpath:morphia.properties")
 public class TestControllerTest extends AbstractControllerTest {
     @Test
     public void test() throws Exception {
