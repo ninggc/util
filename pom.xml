@@ -29,6 +29,7 @@
         <!--        <module>spring-boot-starter/ninggc-morphia-spring-boot-starter</module>-->
 
         <module>template/spring-boot-fast-demo</module>
+        <module>template/simple-demo</module>
         <module>tool/curl-parser</module>
     </modules>
 

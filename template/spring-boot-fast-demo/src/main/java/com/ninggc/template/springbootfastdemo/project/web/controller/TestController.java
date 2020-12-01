@@ -1,6 +1,5 @@
 package com.ninggc.template.springbootfastdemo.project.web.controller;
 
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.ninggc.template.springbootfastdemo.project.dao.SmsRecordMapper;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -24,7 +23,7 @@ public class TestController {
     private SmsRecordMapper smsRecordMapper;
 
 
-    @RequestMapping()
+    @RequestMapping("/select")
     public Object test() {
         // smsRecordMapper.selectPage()
         return smsRecordMapper.selectById(3);

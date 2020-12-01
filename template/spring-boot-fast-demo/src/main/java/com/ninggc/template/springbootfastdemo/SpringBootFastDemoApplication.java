@@ -7,12 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.event.ApplicationStartedEvent;
-//import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
@@ -61,4 +59,10 @@ public class SpringBootFastDemoApplication implements ApplicationListener<Applic
                 .build();
     }
 
+    // @Bean
+    // public RedisTemplate<String, User> redisTemplate() {
+    // RedisTemplate<String, User> template = new RedisTemplate<>();
+    // template.setDefaultSerializer(new Jackson2JsonRedisSerializer<Object>(User.class));
+    // return template;
+    // }
 }
