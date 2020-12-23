@@ -18,6 +18,9 @@ import org.springframework.stereotype.Component;
 @Aspect
 @AopAdapterConfig(acceptAdapters = {LoggerAopAdapter.class, ValidateAopAdapter.class})
 public class ControllerAopLoggerConfigurationImpl extends AopConfiguration {
+    public ControllerAopLoggerConfigurationImpl() {
+        System.out.println("");
+    }
 
 //    @Pointcut("execution(* com.ninggc.template.springbootfastdemo.project.web.controller.*..*(..))")
     @Pointcut("(execution(* com.ninggc.template.springbootfastdemo.project.web..*.*(..))) " +

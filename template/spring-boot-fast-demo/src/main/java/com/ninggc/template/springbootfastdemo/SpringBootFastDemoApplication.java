@@ -8,6 +8,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.event.ApplicationStartedEvent;
 import org.springframework.context.ApplicationListener;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,7 +32,7 @@ public class SpringBootFastDemoApplication implements ApplicationListener<Applic
     @Autowired
     AbstractApplicationContext context;
 
-    @Autowired
+    // @Autowired
     UserMapper userMapper;
 
     public static void main(String[] args) {
@@ -41,6 +42,7 @@ public class SpringBootFastDemoApplication implements ApplicationListener<Applic
     @Override
     public void onApplicationEvent(ApplicationStartedEvent event) {
 //        AopContext.currentProxy();
+        userMapper = context.getBean(UserMapper.class);
     }
 
     @Bean
