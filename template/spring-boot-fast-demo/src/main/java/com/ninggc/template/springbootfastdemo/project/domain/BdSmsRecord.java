@@ -1,9 +1,12 @@
 package com.ninggc.template.springbootfastdemo.project.domain;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Date;
 
 public class BdSmsRecord implements Serializable {
+    @NotNull
     private Integer id;
 
     private Long userId;
@@ -12,6 +15,7 @@ public class BdSmsRecord implements Serializable {
 
     private Long relativeId;
 
+    @NotBlank
     private String phone;
 
     private Date sendDate;

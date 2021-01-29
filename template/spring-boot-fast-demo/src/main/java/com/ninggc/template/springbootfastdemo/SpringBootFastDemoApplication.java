@@ -11,7 +11,9 @@ import org.springframework.boot.context.event.ApplicationStartedEvent;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.support.AbstractApplicationContext;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.transaction.support.TransactionTemplate;
 import org.springframework.web.bind.annotation.RestController;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
@@ -56,6 +58,14 @@ public class SpringBootFastDemoApplication implements ApplicationListener<Applic
 //        smsRecordMapper.selectById(3);
         System.out.println("onApplicationEvent");
 //        AopContext.currentProxy();
+        TransactionTemplate transactionTemplate = context.getBean(TransactionTemplate.class);
+        JdbcTemplate jdbcTemplate = context.getBean(JdbcTemplate.class);
+        transactionTemplate.execute(transactionStatus -> {
+            jdbcTemplate.query("select * from `turing-test`.bd_sms_record limit 1", (resultSet, i) -> {
+                return null;
+            });
+            return null;
+        });
     }
 
     @Bean

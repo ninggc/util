@@ -1,14 +1,14 @@
 package com.ninggc.template.springbootfastdemo.project.web.controller;
 
+import com.google.gson.Gson;
 import com.ninggc.template.springbootfastdemo.project.dao.SmsRecordMapper;
 import com.ninggc.template.springbootfastdemo.project.domain.BdSmsRecord;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author ninggc
@@ -51,5 +51,11 @@ public class TestController {
     public String sleep() throws InterruptedException {
         Thread.sleep(500);
         return "sleep";
+    }
+
+    @PostMapping("/rb")
+    public Object requestBodyTest(@Validated @RequestBody BdSmsRecord smsRecord) {
+        System.out.println(new Gson().toJson(smsRecord));
+        return "";
     }
 }
